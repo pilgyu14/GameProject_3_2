@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1000010558899726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4000013316134570}
+  - component: {fileID: 114000013159885470}
+  m_Layer: 0
+  m_Name: VLeaf
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000013316134570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010558899726}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114000013159885470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010558899726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08de0ddb9ee71394cae12aca7dde5a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  symbol: 0
+  ethereal: 0
+  previous: {fileID: 0}
+  dead: 0
+  baked: 0
+  prefabIdentifier: 
+  lateralSegments: 1
+  medialSegments: 3
+  startMedialSize: 0.1
+  startLateralSize: 0.14
+  offset: {x: 0, y: 0, z: 0}
+  startGrowTime: 0.2
+  contour:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0043243244
+      value: -0.0045766584
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.009824625
+      value: 0.06192413
+      inSlope: 3.7239008
+      outSlope: 3.7239008
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9945946
+      value: 0.00000011920929
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  medialRotation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0021621622
+      value: 0
+      inSlope: 0.46995303
+      outSlope: 0.46995303
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.97945946
+      value: 0.0092378855
+      inSlope: -0.97348475
+      outSlope: -0.97348475
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  lateralRotation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0021504746
+      value: -0.0045655966
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9902609
+      value: 0.28638864
+      inSlope: 1.1570195
+      outSlope: 1.1570195
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  medialSizeChangeCoefficient: 1.05
+  lateralSizeChangeCoefficient: 1.05
+  growTimeChangeCoefficient: 1
+  setStaticOnComplete: 1
+  animate: 1
+  continuousUpdate: 0
+  leafMaterial: {fileID: 2100000, guid: 8abfec7f68547f04cb367e3ed4f77a58, type: 2}
+  editorTimeValue: 1

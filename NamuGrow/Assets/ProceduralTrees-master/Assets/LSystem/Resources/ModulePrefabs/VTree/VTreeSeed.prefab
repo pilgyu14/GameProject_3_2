@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1000010147224668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4000010292826798}
+  - component: {fileID: 114000010511501436}
+  m_Layer: 0
+  m_Name: VTreeSeed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000010292826798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010147224668}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -7.66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114000010511501436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010147224668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8918e418befab264ea9913a68b4e2d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  symbol: 0
+  ethereal: 0
+  previous: {fileID: 0}
+  dead: 0
+  baked: 0
+  prefabIdentifier: VaseSeed
+  isRoot: 1
+  axiom: X
+  inheritRotation: 0
+  generateMode: 1
+  iterations: 5
+  bakedRotationMax: {x: 0, y: 0, z: 0}
+  bakedRotationMin: {x: 0, y: 0, z: 0}
+  bakedScaleMax: 1
+  bakedScaleMin: 1
+  bakedScaleOnSpawn: 1
+  bakedScaleTime: 1
+  startingParameters:
+    store:
+      intValues:
+        keyList: []
+        valueList: 
+        serialized: 1
+      floatValues:
+        keyList: []
+        valueList: []
+        serialized: 1
+      boolValues:
+        keyList: []
+        valueList: 
+        serialized: 1
+      vec2Values:
+        keyList: []
+        valueList: []
+        serialized: 1
+      vec3Values:
+        keyList: []
+        valueList: []
+        serialized: 1
+      vec4Values:
+        keyList: []
+        valueList: []
+        serialized: 1
+      animCurveValues:
+        keyList: []
+        valueList: []
+        serialized: 1
+      colorValues:
+        keyList: []
+        valueList: []
+        serialized: 1
+    serialized: 1
+  rules:
+    fertile: 1
+    rules:
+      keyList: 58004600
+      valueList:
+      - F[-X]F[-X]-X
+      - FF[B]
+      serialized: 1
+  implementations:
+    keyList: 5b0046002d004200
+    valueList:
+    - {fileID: 1000010186174616, guid: 1a4c0a23b4a520b48978fd0f032dae42, type: 3}
+    - {fileID: 1000012444885136, guid: c21c045850c829340a0d02187e02bbee, type: 3}
+    - {fileID: 1000011784236718, guid: a57932f605bb9fb4b935ff8dcdbe34bc, type: 3}
+    - {fileID: 1000013118882062, guid: 820407a1585d9984da58565fd986349c, type: 3}
+    serialized: 1
