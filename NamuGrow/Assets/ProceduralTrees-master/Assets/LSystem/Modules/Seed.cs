@@ -28,7 +28,9 @@ namespace LSystem
         [HideInInspector]
         public bool InheritRotation { get { return inheritRotation; } private set { inheritRotation = value; } }
         [SerializeField]
-        [Tooltip("Does the LSystem Inherit the previous systems rotation?")]
+        
+        [Tooltip("LSystem이 이전 시스템 회전을 상속합니까?")]
+        //[Tooltip("Does the LSystem Inherit the previous systems rotation?")]
         protected bool inheritRotation;
 
         public GenMode GenerateMode { get { return generateMode; } private set { generateMode = value; } }

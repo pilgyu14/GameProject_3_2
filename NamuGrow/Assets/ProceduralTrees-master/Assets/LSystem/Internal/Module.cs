@@ -6,11 +6,13 @@ namespace LSystem
 {
     /// <summary>
     /// LSystem symbol implementation base for module components. Core LSystem algorithm
+    /// 모듈 구성 요소에 대한 LSystem 기호 구현 기반입니다. 핵심 LSystem 알고리즘
     /// </summary>
     public abstract class Module : MonoBehaviour
     {
         /// <summary>
-        /// A unified LSystem symbol implementation execution point with a parameter list for dynamic execution. 
+        /// A unified LSystem symbol implementation execution point with a parameter list for dynamic execution.
+        /// 동적 실행을 위한 매개변수 목록이 있는 통합 LSystem 기호 구현 실행 지점입니다.
         /// </summary>
         /// <param name="bundle">Bundle containing information collected by previous iterations</param>
         /// <returns>Bundle containing any information that previous Modules may be interested in.</returns>
