@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum InputType
@@ -20,8 +21,7 @@ namespace System.Runtime.CompilerServices
     }
 }
 
-
-public record InputData
+public record MouseInputData
 {
     public KeyCode keyCode; 
     public InputType inputType;
@@ -35,6 +35,31 @@ public record InputData
     
 }
 
+public record KeyInputData
+{
+    public KeyCode keyCode; 
+    public InputType inputType;
+    public bool isInput; 
+    
+    public int Age { get; init; }
+
+    public bool Equals(KeyCode _keyCode, InputType _inputType)
+    {
+        return keyCode == _keyCode && inputType == _inputType;
+    }
+    
+}
+
+public class KeyInputData2
+{
+    public KeyInputData keyInputData;
+    public bool isInput;
+
+    /*public bool TryGetValue(KeyInputData _keyInputData, out bool _isInput)
+    {
+        return true;
+    }*/
+}
 public class A
 {
     public int num;
@@ -77,8 +102,11 @@ public class InputManager : MonoSingleton<InputManager>
             isCanInput = value; 
         }
     }
-    private Dictionary<InputData,bool> checkKeyCodeList = new Dictionary<InputData,bool>();
+    private Dictionary<KeyInputData,bool> checkKeyCodeDic = new Dictionary<KeyInputData,bool>();
+    private Dictionary<MouseInputData,bool> checkMouseButtonList = new Dictionary<MouseInputData,bool>();
 
+    private List<KeyInputData2> checkKeyCodeList = new List<KeyInputData2>(); 
+    
     /// <summary>
     /// InputManager에 사용할 키 등록 및 현재 상태 반환
     /// 등록되어 있지 않으면 새로 만들어서 등록
@@ -90,21 +118,28 @@ public class InputManager : MonoSingleton<InputManager>
     public bool CheckIsCanInput(KeyCode _keyCode, InputType _inputType)
     {
         bool isCan= false;
-        InputData newInputData = new InputData { keyCode = _keyCode, inputType = _inputType };
-
-        foreach (var inputData in checkKeyCodeList.Keys)
-        {   
-            inputData.Equals(_keyCode, _inputType);
-        }
-        // 현재 있는지 체크 
-        if (checkKeyCodeList.TryGetValue(newInputData, out isCan) == false)
+        KeyInputData newKeyInputData = new KeyInputData { keyCode = _keyCode, inputType = _inputType };
+        
+        if (checkKeyCodeDic.TryGetValue(newKeyInputData, out isCan) == false)
         {
-            checkKeyCodeList.Add(newInputData, false);
+            checkKeyCodeDic.Add(newKeyInputData, false);
+            CheckInput(); 
         }
+        
+      //  if(checkKeyCodeList.)
 
-        return checkKeyCodeList[newInputData]; 
+        return checkKeyCodeDic[newKeyInputData]; 
     }
 
+    /// <summary>
+    /// 마우스 버튼 입력 
+    /// </summary>
+    /// <param name="_idx"> 0 : 좌클릭 / 1 : 우클릭 / 2 : 스크롤 클릭</param>
+    /// <param name="inputType">Down Up Ing</param>
+    public void GetMouseButton(int _idx, InputType inputType)
+    {
+        
+    }
     public float GetScrollWheel()
     {
         return 1f; 
@@ -119,7 +154,8 @@ public class InputManager : MonoSingleton<InputManager>
     /// </summary>
     private void CheckInput()
     {
-        foreach (var keyCode in checkKeyCodeList.Keys)
+        var _keys = checkKeyCodeDic.Keys; 
+        foreach (var keyCode in checkKeyCodeDic.Keys.ToList())
         {
             //keyCod
             switch (keyCode.inputType)
@@ -127,31 +163,32 @@ public class InputManager : MonoSingleton<InputManager>
                 case InputType.KeyDown:
                     if (Input.GetKeyDown(keyCode.keyCode))
                     {
-                        checkKeyCodeList[keyCode] = true; 
+                        checkKeyCodeDic[keyCode] = true; 
                     }
                     else
                     {
-                        checkKeyCodeList[keyCode] = false; 
+                        //Debug.Log(keyCode);
+                        checkKeyCodeDic[keyCode] = false; 
                     }
                     break;
                 case InputType.Key:
                     if (Input.GetKey(keyCode.keyCode))
                     {
-                        checkKeyCodeList[keyCode] = true; 
+                        checkKeyCodeDic[keyCode] = true; 
                     }
                     else
                     {
-                        checkKeyCodeList[keyCode] = false; 
+                        checkKeyCodeDic[keyCode] = false; 
                     }
                     break;
                 case InputType.KeyUp:
                     if (Input.GetKeyUp(keyCode.keyCode))
                     {
-                        checkKeyCodeList[keyCode] = true; 
+                        checkKeyCodeDic[keyCode] = true; 
                     }
                     else
                     {
-                        checkKeyCodeList[keyCode] = false; 
+                        checkKeyCodeDic[keyCode] = false; 
                     }
                     break;
             }

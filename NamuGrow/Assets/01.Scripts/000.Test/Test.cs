@@ -25,10 +25,10 @@ public class Test : MonoBehaviour
     [ContextMenu("ㅁㅁㅁ")]
     public void TestLog()
     {
-        InputData inputData1 = new InputData { inputType = InputType.Key, keyCode = KeyCode.A };
-        InputData inputData2 = new InputData { inputType = InputType.Key, keyCode = KeyCode.A };
+        KeyInputData keyInputData1 = new KeyInputData { inputType = InputType.Key, keyCode = KeyCode.A };
+        KeyInputData keyInputData2 = new KeyInputData { inputType = InputType.Key, keyCode = KeyCode.A };
         
-        Debug.Log($"record 테스트 : {inputData1 == inputData2}");
+        Debug.Log($"record 테스트 : {keyInputData1 == keyInputData2}");
 
         int a = 1;
         int b = 2;

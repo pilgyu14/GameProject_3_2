@@ -3,23 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using System;
+using System.Linq;
 
+/// <summary>
+/// 나무마다 다르게    
+/// </summary>
+[CreateAssetMenu(menuName = "SO/Tree/TreeDataSO")]
+public class TreeDataSO : ScriptableObject
+{
+    [Header("최대 레벨 설정")]
+    public int maxBranchLv; 
+    public int maxLeafLv; 
+    public int maxWoodenPostLv; 
+    public int maxRootLv; 
+}
+
+[Serializable]
 public class TreeData
 {
-    // 뿌리 리스트 
-    // 가지 리스트
-    // 기둥 클래스 
-    // 잎 리스트 
-
-    public TreeLevel treeLevel; 
-    
-    /*
-     * 나뭇가지 레벨, 
-    나무기둥 레벨,        
-    나무뿌리 레벨, 
-    나뭇잎 레벨, 
-     */
-    
     public float water; // 물 
     public float sunEnergy; // 빛 에너지
     public float sap; // 수액
@@ -47,23 +49,43 @@ public enum EnergyType
 
 public abstract class AbTreeBase : MonoBehaviour, ITree, IUpdateObj
 {
-    private RootBase root; // 뿌리 
+    
     private WoodenPostBase post; // 기둥
-    private BranchBase branchBase; // 가지 
-    private LeafBase leafBase; // 잎 
 
+    private List<RootBase> rootList = new List<RootBase>(); // 뿌리 
     private List<BranchBase> branchBaseList = new List<BranchBase>(); // 가지 
     private List<LeafBase> leafBaseList = new List<LeafBase>(); // 잎 
 
-    private List<ITreeElement> treeElementList = new List<ITreeElement>(); 
+    /// <summary>
+    /// 에너지를 얻어내는 것들 리스트 
+    /// </summary>
+    private List<IProduceEnergy> produceEnergyElementList = new List<IProduceEnergy>();
 
+    [SerializeField]
+    private TreeDataSO treeDataSO; 
+    
     // 현재 가지고 있는 에너지 데이터 
+    [SerializeField]
+    private TreeLevel treeLevel; 
+    [SerializeField]
     private TreeData treeEnergyData;
-    private Dictionary<EnergyType, float> treeEnergyDic = new Dictionary<EnergyType, float>(); 
 
+    // 프로퍼티 
+    public TreeData TreeEnergyData => treeEnergyData;
+    public TreeDataSO TreeSettingData => treeDataSO; 
+    
+    // 테스트용 
+    public float testUpgradeAmount;
+
+    [ContextMenu("강화 테스트")]
+    public void UpradeTest()
+    {
+        
+    }
     protected virtual void Awake()
     {
         CashingElements();
+        InitTreeElements();
     }
 
     protected virtual void Start()
@@ -89,22 +111,42 @@ public abstract class AbTreeBase : MonoBehaviour, ITree, IUpdateObj
         {
             curCycleTime = 0;
             ProduceEnergy();
-        }    }
+            Debug.Log("에너지 생산");
+        }    
+    }
 
     public virtual void OnLateUpdate() { }
 
     public virtual void OnFixedUpdate() { }
-    
 
+
+    /// <summary>
+    /// 외부에서 에너지를 얻을 경우 
+    /// </summary>
+    /// <param name="_energyType"></param>
+    /// <param name="_amount"></param>
+    public void AddEnergy(EnergyType _energyType, float _amount)
+    {
+        
+    }
     /// <summary>
     /// 나무 요소들 캐싱 
     /// </summary>
     private void CashingElements()
     {
-        root = GetComponentInChildren<RootBase>(); 
-        post = GetComponentInChildren<WoodenPostBase>(); 
-        branchBase = GetComponentInChildren<BranchBase>(); 
-        leafBase = GetComponentInChildren<LeafBase>(); 
+        post = GetComponentInChildren<WoodenPostBase>();
+        rootList = GetComponentsInChildren<RootBase>().ToList(); 
+        leafBaseList = GetComponentsInChildren<LeafBase>().ToList(); 
+    }
+
+    /// <summary>
+    /// 관찰하며 에너지 얻을 거 체크 
+    /// </summary>
+    private void InitTreeElements()
+    {
+        produceEnergyElementList.Clear();
+        produceEnergyElementList.AddRange(leafBaseList);
+        produceEnergyElementList.AddRange(rootList);
     }
 
     /// <summary>
@@ -112,7 +154,7 @@ public abstract class AbTreeBase : MonoBehaviour, ITree, IUpdateObj
     /// </summary>
     protected void ProduceEnergy()
     {
-        foreach (var treeElement in treeElementList)
+        foreach (var treeElement in produceEnergyElementList)
         {
             float outputEnergy = treeElement.ProduceEnergy(); //  생산된 에너지 
 
