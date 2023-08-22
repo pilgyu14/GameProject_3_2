@@ -14,6 +14,7 @@ namespace _01.Scripts.RTS
         private float goodsCount; 
         
         private int togetherDay;
+        private TogetherTime TogetherTime;
         
         private float heath;
         private float healing;
@@ -43,6 +44,14 @@ namespace _01.Scripts.RTS
             SO.goodsCount = goodsCount;
             
             SO.togetherDay = togetherDay;
+
+            SO.heath = heath;
+            SO.healing = healing;
+
+            SO.groundAttack = groundAttack;
+            SO.airAttack = airAttack;
+            SO.attackSpeed = attackSpeed;
+            SO.range = range;
         }
     }
 }

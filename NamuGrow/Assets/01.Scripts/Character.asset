@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45f936f5bc64bb08cff62b76613022f, type: 3}
   m_Name: Character
   m_EditorClassIdentifier: 
-  name: 
+  name: "\uC9C4\uB4DC\uAE30"
   goodsType: 0
-  goodsCount: 0
-  togetherDay: 0
-  heath: 0
-  healing: 0
-  groundAttack: 0
-  airAttack: 0
-  attackSpeed: 0
-  range: 0
-  moveType: -1
-  moveSpeed: 0
-  toolTip: 
+  goodsCount: 11
+  togetherDay: 1
+  togetherTime: -1
+  heath: 1
+  healing: 1
+  groundAttack: 1
+  airAttack: 1
+  attackSpeed: 1
+  range: 1
+  moveType: 0
+  moveSpeed: 1
+  toolTip: "\uC886\uB42C\uB124"

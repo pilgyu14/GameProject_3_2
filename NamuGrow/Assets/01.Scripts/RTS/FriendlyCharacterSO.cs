@@ -14,6 +14,7 @@ namespace _01.Scripts.RTS
         public float goodsCount; 
         
         public int togetherDay;
+        public TogetherTime togetherTime;
         
         public float heath;
         public float healing;
