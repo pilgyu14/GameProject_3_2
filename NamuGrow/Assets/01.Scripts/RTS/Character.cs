@@ -9,11 +9,11 @@ namespace _01.Scripts.RTS
         [SerializeField] private FriendlyCharacterSO SO;
 
         private string name;
-        private GoodsType goodsType;
-        private float goodsCount;
-
-        private int togetherDay;
         
+        private GoodsType goodsType;
+        private float goodsCount; 
+        
+        private int togetherDay;
         
         private float heath;
         private float healing;
@@ -22,10 +22,11 @@ namespace _01.Scripts.RTS
         private float airAttack;
         private float attackSpeed;
         private float range;
-
-        private int a = (int)MoveType.ground;
+        
+        
+        private MoveType moveType;
         private float moveSpeed;
-
+        
         private string toolTip;
         
         private void Awake()
@@ -37,7 +38,10 @@ namespace _01.Scripts.RTS
         private void Init()
         {
             SO.name = name;
+            
+            SO.goodsType = goodsType;
             SO.goodsCount = goodsCount;
+            
             SO.togetherDay = togetherDay;
         }
     }

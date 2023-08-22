@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +8,16 @@ public class Enum
     
 }
 
-enum GoodsType
+public enum GoodsType
 {
     sap,   
 }
 
-enum MoveType
+[System.Flags]
+public enum MoveType
 {
     ground,
-    air
+    air,
+    ang,
+    fasdfsdf
 }

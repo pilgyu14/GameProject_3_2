@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Character
   m_EditorClassIdentifier: 
   name: 
+  goodsType: 0
+  goodsCount: 0
   togetherDay: 0
   heath: 0
   healing: 0
@@ -20,3 +22,6 @@ MonoBehaviour:
   airAttack: 0
   attackSpeed: 0
   range: 0
+  moveType: -1
+  moveSpeed: 0
+  toolTip: 

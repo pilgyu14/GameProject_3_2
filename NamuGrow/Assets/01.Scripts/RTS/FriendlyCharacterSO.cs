@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
@@ -9,8 +10,7 @@ namespace _01.Scripts.RTS
     {
         public string name;
         
-        [SerializeField]
-        private GoodsType goodsType;
+        public GoodsType goodsType;
         public float goodsCount; 
         
         public int togetherDay;
@@ -23,11 +23,13 @@ namespace _01.Scripts.RTS
         public float attackSpeed;
         public float range;
 
-        [SerializeField] private MoveType moveType;
-        public int moveTypeInt = (int)moveTpye;
+        
+        
+        public MoveType moveType;
         public float moveSpeed;
 
         public string toolTip;
+
         
     }
 }
