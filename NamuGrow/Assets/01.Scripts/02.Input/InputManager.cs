@@ -23,14 +23,14 @@ namespace System.Runtime.CompilerServices
 
 public record MouseInputData
 {
-    public KeyCode keyCode; 
+    public int mouseType; 
     public InputType inputType;
     
     public int Age { get; init; }
 
-    public bool Equals(KeyCode _keyCode, InputType _inputType)
+    public bool Equals(int _mouseType, InputType _inputType)
     {
-        return keyCode == _keyCode && inputType == _inputType;
+        return mouseType == _mouseType && inputType == _inputType;
     }
     
 }
@@ -130,6 +130,22 @@ public class InputManager : MonoSingleton<InputManager>
 
         return checkKeyCodeDic[newKeyInputData]; 
     }
+    
+    public bool CheckIsCanInput(int _mouseType, InputType _inputType)
+    {
+        bool isCan= false;
+        MouseInputData newKeyInputData = new MouseInputData { mouseType = _mouseType, inputType = _inputType };
+        
+        if (checkMouseButtonList.TryGetValue(newKeyInputData, out isCan) == false)
+        {
+            checkMouseButtonList.Add(newKeyInputData, false);
+            CheckInput(); 
+        }
+        
+        //  if(checkKeyCodeList.)
+
+        return checkMouseButtonList[newKeyInputData]; 
+    }
 
     /// <summary>
     /// 마우스 버튼 입력 
@@ -154,7 +170,7 @@ public class InputManager : MonoSingleton<InputManager>
     /// </summary>
     private void CheckInput()
     {
-        var _keys = checkKeyCodeDic.Keys; 
+        // KeyCode 체크
         foreach (var keyCode in checkKeyCodeDic.Keys.ToList())
         {
             //keyCod
@@ -194,6 +210,44 @@ public class InputManager : MonoSingleton<InputManager>
             }
              
 
+        }
+        
+        // 마우스 버튼 체크 
+        foreach (var _mouseButton in checkMouseButtonList.Keys.ToList())
+        {
+            switch (_mouseButton.inputType)
+            {
+                case InputType.KeyDown:
+                    if (Input.GetMouseButtonDown(_mouseButton.mouseType))
+                    {
+                        checkMouseButtonList[_mouseButton] = true; 
+                    }
+                    else
+                    {
+                        checkMouseButtonList[_mouseButton] = false; 
+                    }
+                    break;
+                case InputType.Key:
+                    if (Input.GetMouseButton(_mouseButton.mouseType))
+                    {
+                        checkMouseButtonList[_mouseButton] = true; 
+                    }
+                    else
+                    {
+                        checkMouseButtonList[_mouseButton] = false; 
+                    }
+                    break;
+                case InputType.KeyUp:
+                    if (Input.GetMouseButtonUp(_mouseButton.mouseType))
+                    {
+                        checkMouseButtonList[_mouseButton] = true; 
+                    }
+                    else
+                    {
+                        checkMouseButtonList[_mouseButton] = false; 
+                    }
+                    break;
+            }
         }
     }
     

@@ -15,7 +15,7 @@ public class ClickManager : MonoSingleton<ClickManager>, IUpdateObj
         // 클릭 감지 
         if (Input.GetMouseButtonDown(0))
         {
-            
+                
         }
     }
 
