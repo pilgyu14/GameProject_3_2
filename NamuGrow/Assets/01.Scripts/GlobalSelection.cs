@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class global_selection : MonoBehaviour
+public class GlobalSelection : MonoBehaviour
 {
     
-    selected_dictionary selected_table;
+    SelectedDictionary selected_table;
     RaycastHit hit;
 
     bool dragSelect;
@@ -30,7 +30,7 @@ public class global_selection : MonoBehaviour
     void Start()
     {
         
-        selected_table = GetComponent<selected_dictionary>();
+        selected_table = GetComponent<SelectedDictionary>();
         dragSelect = false;
     }
 
@@ -95,7 +95,7 @@ public class global_selection : MonoBehaviour
                 {
                     Ray ray = Camera.main.ScreenPointToRay(corner);
 
-                    if (Physics.Raycast(ray, out hit, 50000.0f, (1 << 8)))
+                    if (Physics.Raycast(ray, out hit, 50000.0f ))
                     {
                         verts[i] = new Vector3(hit.point.x, hit.point.y, hit.point.z);
                         vecs[i] = ray.origin - hit.point;

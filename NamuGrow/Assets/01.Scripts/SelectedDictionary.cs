@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class selected_dictionary : MonoBehaviour
+public class SelectedDictionary : MonoBehaviour
 {
     public Dictionary<int, GameObject> selectedTable = new Dictionary<int, GameObject>();
 
