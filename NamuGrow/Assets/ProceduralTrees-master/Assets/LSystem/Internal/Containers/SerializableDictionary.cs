@@ -17,9 +17,11 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
 
     public List<TValue> ValueList { get { return valueList; } set { valueList = value;} }
     [SerializeField] protected List<TValue> valueList = new List<TValue>();
-
+    
+    
     Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
 
+    public Dictionary<TKey, TValue> Dictionary => dictionary; 
     public int Count { get { return dictionary.Count; } private set { } }
 
     public IEqualityComparer<TKey> Comparer { get { return dictionary.Comparer; }  private set{}}
@@ -153,6 +155,9 @@ public class StringObjectDict : SerializableDictionary<string, object>
 [Serializable] public class StringVec4Dict : SerializableDictionary<string, Vector4> { }
 [Serializable] public class StringAnimationCurveDict : SerializableDictionary<string, AnimationCurve> { }
 [Serializable] public class StringColorDict : SerializableDictionary<string, Color> { }
+[Serializable]public class NeedEnergyDic : SerializableDictionary<EnergyType, int>
+{
+}
 
 
 

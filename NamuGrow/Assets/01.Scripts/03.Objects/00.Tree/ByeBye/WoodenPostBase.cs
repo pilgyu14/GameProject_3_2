@@ -5,7 +5,7 @@ using UnityEngine;
 public class WoodenPostBase : AbTreeElement<OakTree>
 {
     public override EnergyType ProduceEnergyType => EnergyType.None;
-    public override bool UpgradeSize()
+    public override bool Upgrade()
     {
         return true; 
     }

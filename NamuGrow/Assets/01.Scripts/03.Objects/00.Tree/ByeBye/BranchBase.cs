@@ -9,7 +9,7 @@ public class BranchBase : AbTreeElement<OakTree> , IIncreaseUpgrade
     
     public override EnergyType ProduceEnergyType => EnergyType.None;
 
-    public override bool UpgradeSize()
+    public override bool Upgrade()
     {
         // 사이즈 업 
         // 현재 에너지 체크 
