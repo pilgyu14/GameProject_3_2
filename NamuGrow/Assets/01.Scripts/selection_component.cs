@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class selection_component : MonoBehaviour
 {
+    private Color DefaultColor;
+    private Renderer renderer;
     void Start()
     {
-        GetComponent<Renderer>().material.color = Color.red;
+        renderer = GetComponent<Renderer>();
+        DefaultColor = renderer.material.color;
+        renderer.material.color = Color.red;
     }
 
     private void OnDestroy()
     {
-        GetComponent<Renderer>().material.color = Color.white;
+        renderer.material.color = DefaultColor;
     }
 }
