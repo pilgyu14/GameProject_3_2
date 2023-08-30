@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45f936f5bc64bb08cff62b76613022f, type: 3}
   m_Name: Character
   m_EditorClassIdentifier: 
-  name: 
+  name: S
   goodsType: 0
   goodsCount: 0
   togetherDay: 0
@@ -25,4 +25,4 @@ MonoBehaviour:
   range: 0
   moveType: 0
   moveSpeed: 1
-  toolTip: "\uC886\uB42C\uB124"
+  toolTip: S
