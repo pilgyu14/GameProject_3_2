@@ -12,7 +12,7 @@ public interface IObserver
         get;
     }
 
-    void AddObserver(IReceiver _receiver)
+    public void AddObserver(IReceiver _receiver)
     {
         if (!Receivers.Contains(_receiver))
         {

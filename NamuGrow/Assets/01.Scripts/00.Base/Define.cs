@@ -3,7 +3,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#region  Enum 
+#region  Enum
+
+public enum TreeSystem
+{
+    Produce, // 자원 생산 
+    Wall, // 벽 
+    Attack, // 공격 
+}
 
 public enum TreeLevel
 {

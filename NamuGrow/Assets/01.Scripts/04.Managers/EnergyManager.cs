@@ -135,4 +135,6 @@ public class EnergyManager : MonoSingleton<EnergyManager>
 
         return _energy; 
     }
+
+
 }

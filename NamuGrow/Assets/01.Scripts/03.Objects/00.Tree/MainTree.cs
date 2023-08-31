@@ -2,70 +2,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class ProduceComp : MonoBehaviour
+public class WallComp : MonoBehaviour
 {
-    [SerializeField] private float cycleTime = 1f;
-    [SerializeField] private float curCycleTime = 1f;
     
-    /// <summary>
-    /// 에너지를 얻어내는 것들 리스트 
-    /// </summary>
-    private List<IProduceEnergy> produceEnergyElementList = new List<IProduceEnergy>();
-    // 프로퍼티 
-    public List<IProduceEnergy> ProduceEnergyElementList => produceEnergyElementList; 
-    
-    /// <summary>
-    /// 외부에서 에너지를 얻을 경우 
-    /// </summary>
-    /// <param name="_energyType"></param>
-    /// <param name="_amount"></param>
-    public void AddEnergy(EnergyType _energyType, float _amount)
-    {
-    }
-
-    public void Update()
-    {
-        // 시간마다 에너지 생산 
-        curCycleTime += Time.deltaTime;
-        if (curCycleTime >= cycleTime)
-        {
-            curCycleTime = 0;
-            ProduceEnergy();
-            Debug.Log("에너지 생산");  
-        }
-    }
-    /// <summary>
-    ///  에너지 생산  
-    /// </summary>
-    protected virtual void ProduceEnergy()
-    {
-        foreach (var treeElement in produceEnergyElementList)
-        {
-            float outputEnergy = treeElement.ProduceEnergy(); //  생산된 에너지 
-
-            EnergyManager.Instance.AddEnergy(treeElement.ProduceEnergyType, (int)outputEnergy);
-            switch (treeElement.ProduceEnergyType)
-            {
-
-                /*case EnergyType.Water:
-                    treeEnergyData.water = outputEnergy;
-                    break;
-                case EnergyType.SunEnergy:
-                    treeEnergyData.sunEnergy = outputEnergy;
-                    break;
-                case EnergyType.Sap:
-                    treeEnergyData.sap = outputEnergy;
-                    break;
-                case EnergyType.Nutrient:
-                    treeEnergyData.nutrient = outputEnergy;
-                    break;*/
-
-            }
-        }
-    }
-
 }
 
 public class AddTroops
@@ -81,30 +23,72 @@ public class ProductionDataSO : ScriptableObject
 
 }
 
-public interface ITreeBehaviour
-{
-    
-}
 
-[CreateAssetMenu(menuName = "SO/Test/T")]
-public class BehaviourDataSO : ScriptableObject, ITreeBehaviour
-{
-}
 public class MainTree : AbTreeBase, IAddTroops
 {
-    [SerializeField]
-    private ProduceComp produceComp;
+    private static MainTree instance = null;
 
-    public ITreeBehaviour a; 
+    public static MainTree Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType(typeof(MainTree)).GetComponent<MainTree>();
+            }
+
+            return instance;
+        }
+    }
+
+    [SerializeField] private ProduceComp produceComp;
+    [SerializeField] private TroopsComp troopsComp;
+
+    private List<AbTreeSystemComp> treeSystemCompList = new List<AbTreeSystemComp>();
+
+    // 프로퍼티
+    public int Troops => troopsComp.TroopsAmount;
 
     protected override void Awake()
     {
         base.Awake();
-        produceComp ??= GetComponent<ProduceComp>(); 
+        instance = this;
+        produceComp ??= GetComponent<ProduceComp>();
+        troopsComp ??= GetComponent<TroopsComp>();
     }
-    
+
+    protected override void Start()
+    {
+        base.Start();
+        treeSystemCompList.Add(produceComp);
+        treeSystemCompList.Add(troopsComp);
+
+        InitCompData();
+
+        onUpgradeEvt.AddListener(UpdateUpgradeData); 
+    }
+
+    /// <summary>
+    /// 업그레이드시 생산 데이터 업데이트 
+    /// </summary>
+    private void UpdateUpgradeData()
+    {
+        foreach (var _treeSystem in treeSystemCompList)
+        {
+            _treeSystem.UpdateUpgrade();
+        }
+    }
     public void AddTroops(int _troops)
     {
+    }
+
+    private void InitCompData()
+    {
+        foreach (var treeComp in treeSystemCompList)
+        {
+            treeComp.InitSO(this,treeDataSO);
+        }
+        
     }
 
 }

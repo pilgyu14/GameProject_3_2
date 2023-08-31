@@ -5,13 +5,14 @@ using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using System;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 /// <summary>
 /// 나무마다 다르게    
 /// </summary>
-[CreateAssetMenu(menuName = "SO/Tree/TreeDataSO")]
+//[CreateAssetMenu(menuName = "SO/Tree/TreeDataSO")]
 public class RegacyTreeDataSO : ScriptableObject
 {
     [Header("최대 레벨 설정")] public int maxBranchLv;
@@ -20,53 +21,8 @@ public class RegacyTreeDataSO : ScriptableObject
     public int maxRootLv;
 }
 
-
-[CreateAssetMenu(menuName = "SO/Tree/TreeDataSO")]
-public class TreeData2SO : ScriptableObject
-{
-    public TreeType treeType;
-    public EnergyType productEnergyType; // 자원 생산 타입 
-    public TreeLevel maxLevel; // 최대 레벨 
-    public TreeLevel curLevel; // 현재 레벨
-
-    public List<TreeByLevel> treeByLevelList = new List<TreeByLevel>(); // 레벨에 따른 능력치 
-
-    // 현재 나무 데이터 
-    public TreeByLevel CurLevelData => treeByLevelList.Find((x) => x.level == curLevel);
-
-    /// <summary>
-    /// MaxLevel이 되면 false 반환 
-    /// </summary>
-    /// <param name="_value"></param>
-    /// <returns></returns>
-    public bool LevelUp(int _value = 1)
-    {
-        ++curLevel;
-        return curLevel < maxLevel;
-    }
-}
-
-/// <summary>
-/// 레벨에 따른 나무 데이터 
-/// </summary>
 [Serializable]
-public class TreeByLevel
-{
-    public TreeLevel level; // 레벨 
-    public GameObject changeTree; // 변할 나무 
-    public int consumeEnergy; // 소비 에너지양
-
-    public int addTroops; // 추가 병력수  
-    public int productAmount; // 생산 에너지양 
-    public int attackPower;
-    public int hp; 
-    
-    // 강화에 필요한 에너지 
-    public NeedEnergyDic needEnergyDic = new NeedEnergyDic();
-}
-
-[Serializable]
-public class TreeData
+public class TreeData1
 {
     public float water; // 물 
     public float sunEnergy; // 빛 에너지
@@ -90,11 +46,14 @@ public abstract class AbTreeBase : MonoBehaviour, ITree, ITreeElement, IUpdateOb
     private RegacyTreeDataSO regacyTreeDataSo;
 
     // 현재 가지고 있는 에너지 데이터 
-    [SerializeField] private TreeLevel treeLevel;
-    [SerializeField] private TreeData2SO treeDataSO;
+    [SerializeField] protected TreeLevel treeLevel;
+    [SerializeField] protected TreeDataSO treeDataSO;
 
+    protected GameObject model;  
     protected UnityEvent onUpgradeEvt = null;
-    // 프로퍼티 
+    // 프로퍼티
+    public TreeType TreeType => treeDataSO.treeType; 
+
 
     public UnityEvent OnUpgradeEvt
     {
@@ -140,9 +99,6 @@ public abstract class AbTreeBase : MonoBehaviour, ITree, ITreeElement, IUpdateOb
     {
     }
 
-
-
-
     /// <summary>
     /// 나무 요소들 캐싱 
     /// </summary>
@@ -151,6 +107,8 @@ public abstract class AbTreeBase : MonoBehaviour, ITree, ITreeElement, IUpdateOb
         //post = GetComponentInChildren<WoodenPostBase>();
         //rootList = GetComponentsInChildren<RootBase>().ToList();
         //leafBaseList = GetComponentsInChildren<LeafBase>().ToList();
+        
+        model = transform.Find("Model").gameObject;
     }
 
     /// <summary>
@@ -164,9 +122,10 @@ public abstract class AbTreeBase : MonoBehaviour, ITree, ITreeElement, IUpdateOb
     }
 
 
+
     public bool Upgrade()
     {
-        var _treeData = treeDataSO.CurLevelData;
+        var _treeData = treeDataSO.CurLevelSoData;
         
         // 하나의 자원이라도 부족하면 false 
         if (_treeData.needEnergyDic.Dictionary.Any(
@@ -184,6 +143,8 @@ public abstract class AbTreeBase : MonoBehaviour, ITree, ITreeElement, IUpdateOb
 
         // 업그레이드 
         treeDataSO.LevelUp();
+        // 사이즈 업그레이드 
+        model.transform.DOScale(treeDataSO.CurLevelSoData.scale,1f);
         // 할 일 수행 
         onUpgradeEvt?.Invoke();
 

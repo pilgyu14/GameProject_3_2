@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RootBase : AbTreeElement<OakTree> ,IIncreaseUpgrade, IProduceEnergy
 {
+    public int ProduceAmount { get; set; }
     public override EnergyType ProduceEnergyType => EnergyType.None;
     public override bool Upgrade()
     {

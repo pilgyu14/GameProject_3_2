@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TroopsManager : MonoSingleton<TroopsManager>, IObserver
+public class TroopsManager : MonoSingleton<TroopsManager>, IReceiver
 {
     private List<IReceiver> receiverList = new List<IReceiver>();  
     [SerializeField] private int maxTroops; // 병력수 
@@ -17,6 +17,10 @@ public class TroopsManager : MonoSingleton<TroopsManager>, IObserver
         get => maxTroops;
         set => maxTroops = value; 
     }
-
     
+
+    public void Receive()
+    {
+        
+    }
 }

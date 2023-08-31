@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0988837a5928c84ca6d290c43a86015, type: 3}
+  m_Name: MainTree_Lv3
+  m_EditorClassIdentifier: 
+  level: 0
+  changeTree: {fileID: 0}
+  scale: {x: 0, y: 0, z: 0}
+  consumeEnergy: 0
+  addTroops: 0
+  productAmount: 0
+  produceAmountDic:
+    keyList: 
+    valueList: 
+    serialized: 1
+  attackPower: 0
+  hp: 0
+  needEnergyDic:
+    keyList: 
+    valueList: 
+    serialized: 1
