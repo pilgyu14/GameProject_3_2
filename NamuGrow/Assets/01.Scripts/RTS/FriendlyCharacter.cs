@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -52,6 +53,11 @@ namespace _01.Scripts.RTS
             SO.airAttack = airAttack;
             SO.attackSpeed = attackSpeed;
             SO.range = range;
+        }
+
+        private void OnMouseEnter()
+        {
+            Debug.Log(toolTip);
         }
     }
 }
