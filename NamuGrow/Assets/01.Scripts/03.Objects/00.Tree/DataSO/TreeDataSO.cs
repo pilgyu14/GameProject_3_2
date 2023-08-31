@@ -8,6 +8,7 @@ public class TreeDataSO : ScriptableObject
 {
     
     public TreeType treeType;
+    public string spriteAddress;
     public AbTreeBase treePrefab; 
     
     public TreeAbilityType treeAbilityType;
@@ -15,6 +16,7 @@ public class TreeDataSO : ScriptableObject
     public List<EnergyType> productEnergyTypeList =new List<EnergyType>(); // 자원 생산 타입 
     public TreeLevel maxLevel; // 최대 레벨 
     public TreeLevel curLevel; // 현재 레벨
+
 
     public List<TreeByLevelSO> treeByLevelList = new List<TreeByLevelSO>(); // 레벨에 따른 능력치 
 
