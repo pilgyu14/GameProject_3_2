@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "SO/Tree/TreeDataSO")]
 public class TreeDataSO : ScriptableObject
 {
+    
     public TreeType treeType;
+    public AbTreeBase treePrefab; 
+    
+    public TreeAbilityType treeAbilityType;
     public EnergyType productEnergyType; // 자원 생산 타입 
     public List<EnergyType> productEnergyTypeList =new List<EnergyType>(); // 자원 생산 타입 
     public TreeLevel maxLevel; // 최대 레벨 

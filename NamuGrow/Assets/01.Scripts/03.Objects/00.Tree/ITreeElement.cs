@@ -43,7 +43,7 @@ public interface ITreeElement
     // 나를 가지고 있는 나무
     // 업그레이드 return bool // 각각 자신ㄴ에 맞는 재료 ㅇㅇ 
     // 업그레이드 필요 재료 연동 설정 
-    public TreeType TreeType { get;  }
+    public TreeAbilityType TreeAbilityType { get;  }
     public bool Upgrade(); // 크기 강화 
 }
 
@@ -52,6 +52,6 @@ public abstract class AbTreeElement<T> : MonoBehaviour, ITreeElement where T : A
     public T ownerTree;
 
     public abstract  EnergyType ProduceEnergyType { get; }
-    public TreeType TreeType { get; }
+    public TreeAbilityType TreeAbilityType { get; }
     public abstract bool Upgrade();
 }

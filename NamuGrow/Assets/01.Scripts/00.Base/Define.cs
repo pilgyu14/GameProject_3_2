@@ -38,7 +38,7 @@ public enum EnergyType
 /// 나무 역할 
 /// </summary>
 [Flags]
-public enum TreeType
+public enum TreeAbilityType
 {
     None = 0,  
     Product = 1 << 0, // 생산 
@@ -47,6 +47,10 @@ public enum TreeType
     
 }
 
+public enum TreeType
+{
+    
+}
 
 #endregion
 
