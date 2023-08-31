@@ -11,10 +11,12 @@ public class TreesManager : MonoSingleton<TreesManager>
     // 현재 보유 묘목 가지고 있고 
     // 설치할 때 여기서 설치 
 
-    public TreeDataSO FindTreeData(TreeType _treeType)
+    public TreeData FindTreeData(TreeType _treeType)
     {
+        TreeData _treeData = new TreeData();
         var _treeDataSo = allTreeDataSO.allTreeDataSOList.Find((x) => x.treeType == _treeType);
-        return _treeDataSo;
+        _treeData.CopySOData(_treeDataSo);
+        return _treeData;
     }
     public void PlantTree()
     {
