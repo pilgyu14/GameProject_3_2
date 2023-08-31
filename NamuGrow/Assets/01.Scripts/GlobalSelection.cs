@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GlobalSelection : MonoBehaviour
 {
@@ -37,7 +38,9 @@ public class GlobalSelection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //1. when left mouse button clicked (but not released)
+        if(EventSystem.current.IsPointerOverGameObject() == false)
+        {
+            //1. when left mouse button clicked (but not released)
         if (Input.GetMouseButtonDown(0))
         {
             p1 = Input.mousePosition;
@@ -124,7 +127,7 @@ public class GlobalSelection : MonoBehaviour
             dragSelect = false;
 
         }
-       
+        }
     }
 
     private void OnGUI()
