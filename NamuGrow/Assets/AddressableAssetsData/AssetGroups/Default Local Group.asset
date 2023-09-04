@@ -15,16 +15,16 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_Data:
     m_SerializedData: []
-  m_GUID: 66b71eb87c3c6064a8a6efea2279aa3c
+  m_GUID: 8c4c0c7b43907434ca221c3228710379
   m_SerializeEntries:
-  - m_GUID: 7c16603e15e053c4cb5426388eda1a7e
-    m_Address: Assets/03.Prefabs/SelectionDecal.prefab
+  - m_GUID: 14ae07b53f967dc47a413677e8e017ab
+    m_Address: Assets/08.Textures/Leaf.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: 6d8ec833bfbcb7f43905c0f77dd55e1c, type: 2}
+  m_Settings: {fileID: 11400000, guid: 3f3a36d052ef1fb44ac74afc00553fe0, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: bde112e02e9be2b4887e411964340d74, type: 2}
-    - {fileID: 11400000, guid: 58f501bc58be00c4eacfce12d55f5a89, type: 2}
+    - {fileID: 11400000, guid: dc084a5b816f6524083a54346ae662e0, type: 2}
+    - {fileID: 11400000, guid: 69d7125b16e15804b93c217aa3770980, type: 2}
