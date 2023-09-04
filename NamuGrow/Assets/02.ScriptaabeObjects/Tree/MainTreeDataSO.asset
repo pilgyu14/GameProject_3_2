@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: MainTreeDataSO
   m_EditorClassIdentifier: Assembly-CSharp::TreeData2SO
   treeType: 0
+  spriteAddress: 
+  treePrefab: {fileID: 5629446867620374764, guid: ae096d02a3f0e2e45b902ddb5430b9ce, type: 3}
+  treeAbilityType: 0
   productEnergyType: 0
   productEnergyTypeList: 0100000002000000
   maxLevel: 4

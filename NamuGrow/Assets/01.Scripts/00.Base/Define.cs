@@ -49,6 +49,8 @@ public enum TreeAbilityType
 
 public enum TreeType
 {
+    BirchTree,
+    Test,
     
 }
 

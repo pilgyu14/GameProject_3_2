@@ -6,7 +6,8 @@ using UnityEngine;
 public class TreesManager : MonoSingleton<TreesManager>
 {
     [SerializeField]
-    private AllTreeDataSO allTreeDataSO; 
+    private AllTreeDataSO allTreeDataSO;
+
     // 설치된 모든 나무 관리 
     // 현재 보유 묘목 가지고 있고 
     // 설치할 때 여기서 설치 
@@ -18,6 +19,7 @@ public class TreesManager : MonoSingleton<TreesManager>
         _treeData.CopySOData(_treeDataSo);
         return _treeData;
     }
+    
     public void PlantTree()
     {
         
