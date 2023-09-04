@@ -52,6 +52,34 @@ public enum TreeType
     
 }
 
+public interface IDamagable
+{
+    public void Damaged(float _damageAmount);
+    void Die(); 
+    float MaxHealth { get; set; }
+    float CurHealth { get; set; }
+}
+
+public interface IAIAgent
+{
+    
+}
+
+public enum StateType
+{
+    Idle,
+    Patrol,
+    Chase,
+    Attack,
+    Damaged, 
+    Battle, 
+    Died, 
+}
+
+public enum AnimationTriggerType
+{
+    
+}
 #endregion
 
 public class Define 

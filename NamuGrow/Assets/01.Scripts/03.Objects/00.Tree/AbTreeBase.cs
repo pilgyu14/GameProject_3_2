@@ -50,7 +50,7 @@ public abstract class AbTreeBase : MonoBehaviour, ITree, ITreeElement, IUpdateOb
     [SerializeField] protected TreeDataSO treeDataSO;
 
     protected GameObject model;  
-    protected UnityEvent onUpgradeEvt = null;
+    public UnityEvent onUpgradeEvt = null;
     // 프로퍼티
     public TreeAbilityType TreeAbilityType => treeDataSO.treeAbilityType; 
 

@@ -5,9 +5,99 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class WallComp : MonoBehaviour
+public class WallComp : AbTreeSystemComp,IDamagable, IUpdateObj
 {
+    [SerializeField] private StateType stateType = StateType.Idle; 
+    [SerializeField] private float hp;
+    [SerializeField] private float hpHealAmount = 1; 
+    [SerializeField]
+    private float time = 5f;
+
+    private float curTime = 0; 
     
+    public void Die()
+    {
+    }
+
+    [field: SerializeField] public float MaxHealth { get; set; } = 100f; 
+    
+    //public float MaxHealth { get=>maxHp; set=>maxHp = value; }
+    public float CurHealth { get => hp; set => hp =value; }
+
+    public float Hp
+    {
+        get => hp;
+        set
+        {
+            hp = Mathf.Clamp(hp, 0, MaxHealth);
+        }
+    }
+
+    private void Start()
+    {
+        hp = MaxHealth; 
+    }
+
+    public override void UpdateUpgrade()
+    {
+        MaxHealth =treeDataSO.CurLevelSoData.hp;
+    }
+
+    public void Damaged(float _damageAmount)
+    {
+        stateType = StateType.Damaged;
+        hp -= _damageAmount;
+        if (hp <= 0)
+        {
+            Destroy();
+        }
+    }
+
+    private void Destroy()
+    {
+        
+    }
+
+    public void OnUpdate()
+    {
+        if (stateType == StateType.Damaged)
+        {
+            CheckTime(); 
+        }
+        else if (stateType == StateType.Idle)
+        {
+            Heal(); 
+        }
+    }
+
+    private void CheckTime()
+    {
+        curTime += Time.deltaTime;
+        if (curTime >= time)
+        {
+            // 상태 변경 
+            stateType = StateType.Idle;
+            curTime = 0; 
+        }
+    }
+
+    private void Heal()
+    {
+        
+    }
+
+    #region 안 쓰는 Update
+
+    public void OnLateUpdate()
+    {
+    }
+
+    public void OnFixedUpdate()
+    {
+    }
+
+    #endregion
+
 }
 
 public class AddTroops

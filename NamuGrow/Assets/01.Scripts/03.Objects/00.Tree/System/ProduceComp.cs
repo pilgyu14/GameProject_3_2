@@ -44,7 +44,7 @@ public class ProduceComp : AbTreeSystemComp
     private void InitProduceEnergy()
     {
         productionEnergyList.Clear();
-        foreach (var _energyType in treeDataSO.productEnergyTypeList)
+        foreach (var _energyType in treeDataSO.CurLevelSoData.produceAmountDic.KeyList)
         {
             productionEnergyList.Add(new ProductionEnergy(_energyType));
         }

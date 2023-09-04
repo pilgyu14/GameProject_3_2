@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 추가시 색 변경 
+/// </summary>
 public class selection_component : MonoBehaviour
 {
     private Color DefaultColor;

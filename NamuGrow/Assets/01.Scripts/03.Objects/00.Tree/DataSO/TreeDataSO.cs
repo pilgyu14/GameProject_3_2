@@ -12,7 +12,7 @@ public class TreeDataSO : ScriptableObject
     
     public TreeAbilityType treeAbilityType;
     public EnergyType productEnergyType; // 자원 생산 타입 
-    public List<EnergyType> productEnergyTypeList =new List<EnergyType>(); // 자원 생산 타입 
+    //public List<EnergyType> productEnergyTypeList =new List<EnergyType>(); // 자원 생산 타입 
     public TreeLevel maxLevel; // 최대 레벨 
     public TreeLevel curLevel; // 현재 레벨
 
@@ -41,7 +41,7 @@ public class TreeData
     
     public TreeAbilityType treeAbilityType;
     public EnergyType productEnergyType; // 자원 생산 타입 
-    public List<EnergyType> productEnergyTypeList =new List<EnergyType>(); // 자원 생산 타입 
+   // public List<EnergyType> productEnergyTypeList =new List<EnergyType>(); // 자원 생산 타입 
     public TreeLevel maxLevel; // 최대 레벨 
     public TreeLevel curLevel; // 현재 레벨
 
@@ -53,7 +53,7 @@ public class TreeData
         this.treePrefab = _treeDataSO.treePrefab; 
         this.treeAbilityType = _treeDataSO.treeAbilityType; 
         this.productEnergyType = _treeDataSO.productEnergyType; 
-        this.productEnergyTypeList = _treeDataSO.productEnergyTypeList; 
+        //this.productEnergyTypeList = _treeDataSO.productEnergyTypeList; 
         this.maxLevel = _treeDataSO.maxLevel; 
         this.curLevel = _treeDataSO.curLevel;
         this.treeByLevelList = _treeDataSO.treeByLevelList;

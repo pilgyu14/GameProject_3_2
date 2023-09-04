@@ -4,26 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-enum StateType
-{
-    Patrol,
-    Move,
-    Attack, 
-    Died, 
-}
 
-public abstract class State<T>
-{
-    public T owner; 
-    
-    public virtual void Init(T owner)
-    {
-        this.owner = owner;
-    }
-    public abstract void Enter(); 
-    public abstract void Stay(); 
-    public abstract void Exit(); 
-}
+
 
 public class EnemyDataSO
 {
@@ -36,27 +18,17 @@ public class EnemyDataSO
 
 }
 
-/// <summary>
-/// AI 상태 변화에 필요한 데이터 모음 
-/// </summary>
-[CreateAssetMenu(menuName = "SO/AI/AIDataSO")]
-public class AIDataSO : ScriptableObject 
-{
-    public float viewAngle;
-    public float viewRadius;
 
-    public float patrolRadius; 
-    
-    public float attackAngle;
-    public float attackRadius; 
-}
-public class PatrolState : State<TestEnemy>
+public class AttackState<T> : State<T> where T : AbMonster
 {
+    public override StateType PositiveType { get; }
+    public override StateType NagativeType { get; }
+
     public override void Enter()
     {
     }
 
-    public override void Stay()
+    public override void Update()
     {
     }
 
@@ -65,31 +37,76 @@ public class PatrolState : State<TestEnemy>
     }
 }
 
-public class TestEnemy : MonoBehaviour
-{
-    [SerializeField] private AIDataSO aiDataSO; 
-    
-    private Dictionary<Type, State<TestEnemy>> _stateDic = new Dictionary<Type, State<TestEnemy>>();
-    private StateType curStateType;
 
-    private State<TestEnemy> curState; 
-    private PatrolState patrolState;
+public class ChaseState<T> : State<T> where T : AbMonster
+{
+    public override StateType PositiveType { get; }
+    public override StateType NagativeType { get; }
+
+    public override void Enter()
+    {
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+    }
+}
+
+
+public class IdleState<T> : State<T> where T : AbMonster
+{
+    public override StateType PositiveType => StateType.Chase;
+    public override StateType NagativeType => StateType.Idle;
+
+    public override void Enter()
+    {
+    }
+
+    public override void Update()
+    {
+        // 거리 체크 
+        // 추적 스테이트 변경 
+    }
+
+    public override void Exit()
+    {
+    }
+}
+
+
+public class PatrolState<T> : State<T> where T : AbMonster
+{
+    public override StateType PositiveType { get; }
+    public override StateType NagativeType { get; }
+
+    public override void Enter()
+    {
+    }
+
+    public override void Update()
+    {
+    }
+
+    public override void Exit()
+    {
+    }
+}
+
+public class TestEnemy : AbMonster
+{
+    [SerializeField] private AIBrain<TestEnemy> aiBrain; 
 
     private void Awake()
     {
-        patrolState.Init(this);
     }
 
     private void Update()
     {
-        if (curState != null)
-        {
-            curState.Stay(); 
-        }
     }
 
-    public void ChangeState()
-    {
-        
-    }
+
 }
