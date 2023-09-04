@@ -37,10 +37,10 @@ public class InstallGhost : MonoSingleton<InstallGhost> , IUpdateObj
 
     public void GhostObjectHide()
     {
-        if (ghostObject != null)
+        /*if (ghostObject != null)
         {
             return;
-        }
+        }*/
         Debug.Log("오브젝트 도망");
         Destroy(ghostObject);
     }
