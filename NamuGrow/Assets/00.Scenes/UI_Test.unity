@@ -2648,7 +2648,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
   m_sharedMaterial: {fileID: -3359197029103750868, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -3359197029103750868, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2783,7 +2784,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
   m_sharedMaterial: {fileID: -3359197029103750868, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -3359197029103750868, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2918,7 +2920,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
   m_sharedMaterial: {fileID: -3359197029103750868, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -3359197029103750868, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3880,7 +3883,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
   m_sharedMaterial: {fileID: -3359197029103750868, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -3359197029103750868, guid: 2857f7b370344ea4781c079c214314cf, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -4447,6 +4451,67 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &2174510788787546505
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 138047859597896157, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 138047859597896157, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 64.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 138047859597896157, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 138047859597896157, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 105.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 138047859597896157, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 138047859597896157, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 138047859597896157, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 138047859597896157, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 138047859597896157, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 138047859597896157, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 138047859597896157, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114692251690668205, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+      propertyPath: m_Name
+      value: Birch_tree1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
 --- !u!4 &2201118795369116525
 Transform:
   m_ObjectHideFlags: 0
