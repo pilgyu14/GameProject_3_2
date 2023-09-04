@@ -19,7 +19,7 @@ public class EnemyDataSO
 }
 
 
-public class AttackState<T> : State<T> where T : AbMonster
+public class AttackState<T> : State<T> where T : AbMainModule
 {
     public override StateType PositiveType { get; }
     public override StateType NagativeType { get; }
@@ -30,6 +30,7 @@ public class AttackState<T> : State<T> where T : AbMonster
 
     public override void Update()
     {
+        Debug.Log("AttackState..");
     }
 
     public override void Exit()
@@ -38,7 +39,7 @@ public class AttackState<T> : State<T> where T : AbMonster
 }
 
 
-public class ChaseState<T> : State<T> where T : AbMonster
+public class ChaseState<T> : State<T> where T : AbMainModule
 {
     public override StateType PositiveType { get; }
     public override StateType NagativeType { get; }
@@ -49,6 +50,8 @@ public class ChaseState<T> : State<T> where T : AbMonster
 
     public override void Update()
     {
+        Debug.Log("ChaseState..");
+
     }
 
     public override void Exit()
@@ -57,7 +60,7 @@ public class ChaseState<T> : State<T> where T : AbMonster
 }
 
 
-public class IdleState<T> : State<T> where T : AbMonster
+public class IdleState<T> : State<T> where T : AbMainModule
 {
     public override StateType PositiveType => StateType.Chase;
     public override StateType NagativeType => StateType.Idle;
@@ -70,6 +73,7 @@ public class IdleState<T> : State<T> where T : AbMonster
     {
         // 거리 체크 
         // 추적 스테이트 변경 
+        Debug.Log("IdleSate..");
     }
 
     public override void Exit()
@@ -78,7 +82,7 @@ public class IdleState<T> : State<T> where T : AbMonster
 }
 
 
-public class PatrolState<T> : State<T> where T : AbMonster
+public class PatrolState<T> : State<T> where T : AbMainModule
 {
     public override StateType PositiveType { get; }
     public override StateType NagativeType { get; }
@@ -96,16 +100,25 @@ public class PatrolState<T> : State<T> where T : AbMonster
     }
 }
 
-public class TestEnemy : AbMonster
+public class TestEnemy : AbMainModule
 {
-    [SerializeField] private AIBrain<TestEnemy> aiBrain; 
-
+    [SerializeField] private AIBrain<TestEnemy> aiBrain;
+    
+    private NavMeshAgent navMeshAgent; 
+    
     private void Awake()
     {
     }
 
+    private void Start()
+    {
+        aiBrain.InitOwner(this);
+        aiBrain.Start();
+    }
+
     private void Update()
     {
+        aiBrain.Update();
     }
 
 

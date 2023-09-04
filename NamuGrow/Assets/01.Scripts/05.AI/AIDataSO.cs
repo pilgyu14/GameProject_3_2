@@ -9,7 +9,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/AI/AIDataSO")]
 public class AIDataSO : ScriptableObject
 {
-    public LayerMask layerMask;
+    [Header("우선순위 타겟 레이어 마스크")]
+    public IntLayerMaskDic layerMask;
 
     public float idleSpeed;
     public float chaseSpeed; 

@@ -155,9 +155,8 @@ public class StringObjectDict : SerializableDictionary<string, object>
 [Serializable] public class StringVec4Dict : SerializableDictionary<string, Vector4> { }
 [Serializable] public class StringAnimationCurveDict : SerializableDictionary<string, AnimationCurve> { }
 [Serializable] public class StringColorDict : SerializableDictionary<string, Color> { }
-[Serializable]public class EnergyIntDic : SerializableDictionary<EnergyType, int>
-{
-}
+[Serializable]public class EnergyIntDic : SerializableDictionary<EnergyType, int> { }
+[Serializable]public class IntLayerMaskDic : SerializableDictionary<int,LayerMask> { }
 
 
 

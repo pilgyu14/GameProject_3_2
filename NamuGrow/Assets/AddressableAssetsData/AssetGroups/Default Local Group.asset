@@ -15,10 +15,10 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_Data:
     m_SerializedData: []
-  m_GUID: 8c4c0c7b43907434ca221c3228710379
+  m_GUID: fd2f16f504c74884fba4a08e2cf03ecb
   m_SerializeEntries:
-  - m_GUID: 14ae07b53f967dc47a413677e8e017ab
-    m_Address: Assets/08.Textures/Leaf.png
+  - m_GUID: 7c16603e15e053c4cb5426388eda1a7e
+    m_Address: Assets/03.Prefabs/SelectionDecal.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

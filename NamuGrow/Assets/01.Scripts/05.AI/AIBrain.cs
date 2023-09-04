@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System; 
+using System;
+using Random = UnityEngine.Random;
 
-public class AIBrain<T>  where T : AbMonster
+public class AIBrain<T>  where T : AbMainModule
 {
     private T owner = null; 
     [SerializeField] private AIDataSO aiDataSO;
@@ -70,8 +71,49 @@ public class AIBrain<T>  where T : AbMonster
     }
     private void CheckChaseCondition()
     {
-     //   Physics.
+        
     }
+    
+    private void SearchForTargets()
+    {
+        Collider[] targets = Physics.OverlapSphere(transform.position, detectionRadius, targetLayer);
+        
+        if (targets.Length > 0)
+        {
+            Transform selectedTarget = SelectTarget(targets);
+            if (selectedTarget != null)
+            {
+                navMeshAgent.SetDestination(selectedTarget.position);
+            }
+        }
+    }
+
+    private Transform SelectTarget(Collider[] targets)
+    {
+        Transform bestTarget = null;
+        float highestPriority = float.MinValue;
+
+        foreach (Collider target in targets)
+        {
+            float priority = CalculatePriority(target.gameObject);
+            if (priority > highestPriority)
+            {
+                highestPriority = priority;
+                bestTarget = target.transform;
+            }
+        }
+
+        return bestTarget;
+    }
+
+    private float CalculatePriority(GameObject target)
+    {
+        // Implement your priority calculation logic here
+        // For example, distance to target, type of target, etc.
+        return Random.Range(0f, 1f);
+    }
+    
+    
     /// <summary>
     /// 상태 받아오기 
     /// </summary>

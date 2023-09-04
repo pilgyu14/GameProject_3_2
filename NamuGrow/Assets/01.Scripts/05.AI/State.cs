@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class State<T> where T : AbMonster 
+public abstract class State<T> where T : AbMainModule 
 {
     public T owner;
     public AIBrain<T> aiBrain; 

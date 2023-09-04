@@ -64,6 +64,16 @@ public class GlobalSelection : MonoBehaviour
 
                 if(Physics.Raycast(ray,out hit, 50000.0f,targetMask))
                 {
+                    // 나무인가 
+                    if (hit.transform.TryGetComponent<AbTreeBase>(out AbTreeBase _tree) == true)
+                    {
+                        // UI 활성화 
+                        Vector3 _uiTreePos = Util.MainCam.WorldToScreenPoint(hit.transform.position);
+                        // UI 포지션 설정 
+                        // UI 데이터 설정 
+                        // 함수 주고                          
+                    }
+                    
                     // 이미 선택중인 것에 추가 
                     if (Input.GetKey(KeyCode.LeftShift)) //inclusive select
                     {
@@ -89,6 +99,7 @@ public class GlobalSelection : MonoBehaviour
                     }
                 }
             }
+            
             // 다중 선택시 
             else //marquee select
             {
