@@ -426,6 +426,9 @@ MonoBehaviour:
   regacyTreeDataSo: {fileID: 0}
   treeLevel: 0
   treeDataSO: {fileID: 11400000, guid: 6523773cc0d24a5458bab74b6221505b, type: 2}
+  onUpgradeEvt:
+    m_PersistentCalls:
+      m_Calls: []
   testUpgradeAmount: 0
   produceComp: {fileID: 0}
   troopsComp: {fileID: 0}
@@ -2344,6 +2347,9 @@ MonoBehaviour:
   regacyTreeDataSo: {fileID: 0}
   treeLevel: 0
   treeDataSO: {fileID: 0}
+  onUpgradeEvt:
+    m_PersistentCalls:
+      m_Calls: []
   testUpgradeAmount: 0
 --- !u!1 &1685551952
 GameObject:
