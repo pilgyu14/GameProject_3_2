@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d44529c50424c714b871ebe335f5995b, type: 3}
+  m_Name: New Tree Data SO
+  m_EditorClassIdentifier: 
+  treeType: 1
+  spriteAddress: 
+  treePrefab: {fileID: 2253908096966750448, guid: a3d26fe69be697d4f8097906e99caf46, type: 3}
+  treeAbilityType: 0
+  productEnergyType: 0
+  productEnergyTypeList: 
+  maxLevel: 0
+  curLevel: 0
+  treeByLevelList:
+  - {fileID: 11400000, guid: e6af0845690ae0f47b905b5f13fc4add, type: 2}

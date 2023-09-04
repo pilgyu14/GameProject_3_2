@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 
-public class InstallGhost : MonoBehaviour, IUpdateObj
+public class InstallGhost : MonoSingleton<InstallGhost> , IUpdateObj
 {
     [SerializeField]
     private GameObject ghostObject;
@@ -15,42 +15,44 @@ public class InstallGhost : MonoBehaviour, IUpdateObj
     private Ray ray;
     RaycastHit hitInfo;
 
+    private float vectorY;
     private void Awake()
     {
         UpdateManager.Instance.AddUpdateObj(this);
         mainCamera = Camera.main;
     }
 
-    public void GhostObjectSet(GameObject gameObject)
+    public void GhostObjectSet(GameObject gameObject, float height)
     {
+        if(ghostObject != null)
+            Destroy(ghostObject);
         if (ghostObject == gameObject || gameObject == null)
         {
             return;
         }
-
-        ghostObject = gameObject;
-        
+        ghostObject = Instantiate(gameObject);;
+        vectorY = height;
     }
 
 
     public void GhostObjectHide()
     {
-        if (ghostObject.activeSelf == false)
+        if (ghostObject != null)
         {
             return;
         }
         Debug.Log("오브젝트 도망");
-        ghostObject.SetActive(true);
+        Destroy(ghostObject);
     }
 
     public void GhostObjectShow()
     {
-        if (ghostObject.activeSelf == true)
+        if (ghostObject == null)
         {
             return;
         }
         Debug.Log("오브젝트 쇼타임");
-        ghostObject.SetActive(false);
+        Instantiate(ghostObject);
     }
 
     public void OnUpdate()
@@ -79,7 +81,7 @@ public class InstallGhost : MonoBehaviour, IUpdateObj
         {
             if (hitInfo.transform.gameObject.layer != LayerMask.NameToLayer("Ghost"))
             {
-                ghostObject.transform.position = hitInfo.point;
+                ghostObject.transform.position = hitInfo.point + new Vector3(0,vectorY,0);
             
                 Debug.Log("Mouse World Position: " + gameObject.transform.position);
             }
