@@ -76,7 +76,7 @@ public class AIBrain<T>  where T : AbMainModule
     
     private void SearchForTargets()
     {
-        Collider[] targets = Physics.OverlapSphere(transform.position, detectionRadius, targetLayer);
+        /*Collider[] targets = Physics.OverlapSphere(transform.position, detectionRadius, targetLayer);
         
         if (targets.Length > 0)
         {
@@ -85,7 +85,7 @@ public class AIBrain<T>  where T : AbMainModule
             {
                 navMeshAgent.SetDestination(selectedTarget.position);
             }
-        }
+        }*/
     }
 
     private Transform SelectTarget(Collider[] targets)

@@ -28,9 +28,9 @@ public class TreeInstallUIType : MonoBehaviour
 
     public void TypeSendTreeManager(TreeDataSO treeDataSo)
     {
-        if (treeInstallManager != null)
+        if (treeInstallManager.InstallObjectGet() != null)
         {
-            treeInstallManager.InstallPrefab = null;
+            treeInstallManager.InstallObjectSet(null);
         }
         
         insGameObeject = treeManager.FindTreeData(treeDataSo.treeType).treePrefab.gameObject;
@@ -41,10 +41,8 @@ public class TreeInstallUIType : MonoBehaviour
         bounds = mesh.bounds;
         height = bounds.size.y / 2;*/
 
-        treeInstallManager.InstallPrefab = insGameObeject;
+        treeInstallManager.InstallObjectSet(insGameObeject);
         
         installGhost.GhostObjectSet(insGameObeject,0);
-        
-        Debug.Log(treeInstallManager.InstallPrefab);
     }
 }

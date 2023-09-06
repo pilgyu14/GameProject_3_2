@@ -51,6 +51,7 @@ public enum TreeType
 {
     BirchTree,
     Test,
+    Test2,
     
 }
 

@@ -5,12 +5,12 @@ using UnityEngine.AI;
 
 public class AIMoveModule : AbBaseModule
 {
-    private NavMeshAgent navMeshAgent;
+    /*private NavMeshAgent navMeshAgent;
 
     public void MovePosition(Vector3 _pos)
     {
-        navMeshAgent.    
+        //navMeshAgent.    
     }
-    
+    */
     
 }

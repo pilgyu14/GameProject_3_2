@@ -24,8 +24,11 @@ public class InstallGhost : MonoSingleton<InstallGhost> , IUpdateObj
 
     public void GhostObjectSet(GameObject gameObject, float height)
     {
-        if(ghostObject != null)
+        if (ghostObject != null)
+        {
             Destroy(ghostObject);
+        }
+            
         if (ghostObject == gameObject || gameObject == null)
         {
             return;
@@ -37,12 +40,13 @@ public class InstallGhost : MonoSingleton<InstallGhost> , IUpdateObj
 
     public void GhostObjectHide()
     {
-        /*if (ghostObject != null)
+        if (ghostObject != null)
         {
             return;
-        }*/
+        }
+
+        ghostObject = null;
         Debug.Log("오브젝트 도망");
-        Destroy(ghostObject);
     }
 
     public void GhostObjectShow()
@@ -62,30 +66,26 @@ public class InstallGhost : MonoSingleton<InstallGhost> , IUpdateObj
 
     public void OnLateUpdate()
     {
-        if (Input.GetKey(KeyCode.E))
-        {
-            GhostObjectHide();
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            GhostObjectShow();
-        }
+        
     }
 
     public void OnFixedUpdate()
     {
-        ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        
-        
-        if (Physics.Raycast(ray, out hitInfo,10000000f))
+        if (ghostObject != null)
         {
-            if (hitInfo.transform.gameObject.layer != LayerMask.NameToLayer("Ghost"))
+            ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        
+        
+            if (Physics.Raycast(ray, out hitInfo,Mathf.Infinity, ~8))
             {
-                ghostObject.transform.position = hitInfo.point + new Vector3(0,vectorY,0);
+                if (hitInfo.transform.gameObject.layer != LayerMask.NameToLayer("Ghost"))
+                {
+                    ghostObject.transform.position = hitInfo.point + new Vector3(0,vectorY,0);
             
-                Debug.Log("Mouse World Position: " + gameObject.transform.position);
+                    Debug.Log("Mouse World Position: " + gameObject.transform.position);
+                }
+                // Ray가 어떤 객체와 충돌했을 경우 그 충돌 지점의 위치를 얻습니다.
             }
-            // Ray가 어떤 객체와 충돌했을 경우 그 충돌 지점의 위치를 얻습니다.
         }
     }
 }
