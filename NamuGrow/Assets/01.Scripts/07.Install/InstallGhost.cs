@@ -74,16 +74,15 @@ public class InstallGhost : MonoSingleton<InstallGhost> , IUpdateObj
         if (ghostObject != null)
         {
             ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            LayerMask layerMask = 8;
         
-        
-            if (Physics.Raycast(ray, out hitInfo,Mathf.Infinity, ~8))
+            if (Physics.Raycast(ray, out hitInfo,Mathf.Infinity, 7))
             {
-                if (hitInfo.transform.gameObject.layer != LayerMask.NameToLayer("Ghost"))
-                {
+               
                     ghostObject.transform.position = hitInfo.point + new Vector3(0,vectorY,0);
             
                     Debug.Log("Mouse World Position: " + gameObject.transform.position);
-                }
+                
                 // Ray가 어떤 객체와 충돌했을 경우 그 충돌 지점의 위치를 얻습니다.
             }
         }
