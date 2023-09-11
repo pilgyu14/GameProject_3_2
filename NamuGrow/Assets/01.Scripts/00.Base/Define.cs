@@ -63,6 +63,16 @@ public interface IDamagable
     float CurHealth { get; set; }
 }
 
+/// <summary>
+/// 클릭되는 유닛인가 (아군인가) 
+/// </summary>
+public interface IClickUnit
+{
+    public bool IsClickUnit { get; set; }
+    public void ClickUnit();
+    public void CancelClickUnit(); 
+}
+
 public interface IAIAgent
 {
     

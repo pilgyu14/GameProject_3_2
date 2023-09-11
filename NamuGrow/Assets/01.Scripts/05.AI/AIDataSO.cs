@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 /// <summary>
@@ -9,14 +10,16 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/AI/AIDataSO")]
 public class AIDataSO : ScriptableObject
 {
-    [Header("우선순위 타겟 레이어 마스크")]
-    public IntLayerMaskDic layerMask;
-
+    [Header("타겟 레이어 마스크")]
+    public LayerMask layerMask;
+    [Header("우선순위 타겟 레이어 마스크 ( Key의 숫자가 높을 수록 높은 우선순위)")]
+    public IntLayerMaskDic layerMaskPriority;
+    
     public float idleSpeed;
     public float chaseSpeed; 
     
-    public float viewAngle;
-    public float viewRadius;
+    public float chaseViewAngle;
+    public float chaseViewRadius;
 
     public float patrolRadius; 
     

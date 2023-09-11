@@ -6,13 +6,15 @@ public abstract class AbBaseModule : MonoBehaviour
 {
     private AbMainModule mainModule;
 
+    protected virtual void Awake()
+    {
+        
+    }
+    
     protected virtual void Start(AbMainModule _mainModule)
     {
         this.mainModule = _mainModule; 
     }
 
-    protected virtual void Awake()
-    {
-        
-    }
+
 }
