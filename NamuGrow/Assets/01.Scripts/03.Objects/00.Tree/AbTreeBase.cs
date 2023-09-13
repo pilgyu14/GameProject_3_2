@@ -107,6 +107,7 @@ public abstract class AbTreeBase : MonoBehaviour, ITree, ITreeElement, IUpdateOb
         //rootList = GetComponentsInChildren<RootBase>().ToList();
         //leafBaseList = GetComponentsInChildren<LeafBase>().ToList();
         
+
         model = transform.Find("Model").gameObject;
     }
 

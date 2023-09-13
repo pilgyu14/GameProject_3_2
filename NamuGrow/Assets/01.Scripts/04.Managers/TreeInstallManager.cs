@@ -51,7 +51,7 @@ public class TreeInstallManager : MonoSingleton<TreeInstallManager>, IUpdateObj
         {
             if (hitInfo.transform.gameObject.layer != 8)
             {
-                Debug.Log(transform.gameObject.layer);
+                //Debug.Log(transform.gameObject.layer);
                 if (Input.GetMouseButtonDown(0))
                 {
                     if (InstallPrefab != null)
@@ -62,9 +62,9 @@ public class TreeInstallManager : MonoSingleton<TreeInstallManager>, IUpdateObj
                         InstallGhost.Instance.GhostObjectSet(null,0);
                         InstallPrefab = null;
                     
-                        Debug.Log("Mouse World Position: " + InstallPrefab.transform.position);
+                        //Debug.Log("Mouse World Position: " + InstallPrefab.transform.position);
                     }
-                    Debug.Log("안");
+                    //Debug.Log("안");
                 }
             }
             /*else-
