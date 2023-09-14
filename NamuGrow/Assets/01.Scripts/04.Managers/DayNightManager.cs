@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
 
-public class DayNightManager : MonoBehaviour, IUpdateObj
+public class DayNightManager : MonoSingleton<DayNightManager>, IUpdateObj
 {
     public Light sun; // 낮과 밤을 제어할 라이트 컴포넌트
     public List<float> dayDurationsInSeconds = new List<float>(); // 낮의 지속 시간 (초) 리스트
@@ -15,17 +15,17 @@ public class DayNightManager : MonoBehaviour, IUpdateObj
     public Material nightSkybox; // 밤 스카이박스
 
     private float timer = 0.0f;
-    private bool isDay = true;
+    public bool isDay = true;
     private bool isRotating;
 
     private int CurrentDay;
     
-    private int currentDay 
+    public int currentDay 
     {
         set
         {
-            CurrentDay = currentDay;
-            DayUISet();
+            CurrentDay = value;
+            Invoke("DayUISet", 1.5f);
         }
         get
         {
@@ -50,12 +50,14 @@ public class DayNightManager : MonoBehaviour, IUpdateObj
 
     public TextMeshProUGUI dayTimer;
 
+    public List<EventSO> EventSOList = new List<EventSO>();
+
     private void Awake()
     {
         UpdateManager.Instance.AddUpdateObj(this);
         
         // 초기 설정을 첫 번째 낮으로 설정
-        isDay = true;
+        isDay = false;
         RenderSettings.skybox = daySkybox;
         sun.intensity = 1.5f;
         //currentDay = 0;
@@ -78,7 +80,7 @@ public class DayNightManager : MonoBehaviour, IUpdateObj
     public void OnFixedUpdate()
     {
         timer -= Time.deltaTime;
-
+        
         if (timer <= 0.0f)
         {
             // 현재가 낮이면 밤으로 변경
@@ -178,11 +180,12 @@ public class DayNightManager : MonoBehaviour, IUpdateObj
 
     private void DayUISet()
     {
-        dayTimer.text = "Day " + (1 + currentDay).ToString();
+        dayTimer.text = "Day " + currentDay.ToString();
+        Debug.Log(currentDay);
     }
 
     private void EventChecker()
     {
-        
+        EventManager.Instance.EventSet(EventSOList[currentDay]);
     }
 }
