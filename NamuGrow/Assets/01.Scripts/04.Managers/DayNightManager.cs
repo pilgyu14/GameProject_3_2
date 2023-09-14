@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine.UI;
 
 public class DayNightManager : MonoBehaviour, IUpdateObj
 {
@@ -13,11 +16,39 @@ public class DayNightManager : MonoBehaviour, IUpdateObj
 
     private float timer = 0.0f;
     private bool isDay = true;
-    private int currentDay = 0;
+    private bool isRotating;
+
+    private int CurrentDay;
+    
+    private int currentDay 
+    {
+        set
+        {
+            CurrentDay = currentDay;
+            DayUISet();
+        }
+        get
+        {
+            return CurrentDay;
+        }
+    }
+    
+    //public List<> 
+
     private float startIntensity;
     private float targetIntensity;
     private float intensityChangeStartTime;
     private bool isSkyboxChanging = false;
+    
+    public RectTransform dayNightIcon;
+    public float rotationDuration = 2.0f; // 회전 애니메이션의 지속 시간 (초)
+    public float finalRotationDuration = 0.5f; // 확 변하는 애니메이션의 지속 시간 (초)
+
+    private float rotationTimer = 0.0f;
+    private Quaternion initialRotation;
+    private bool isUIRotating = false;
+
+    public TextMeshProUGUI dayTimer;
 
     private void Awake()
     {
@@ -59,6 +90,7 @@ public class DayNightManager : MonoBehaviour, IUpdateObj
                 startIntensity = 1.5f;
                 intensityChangeStartTime = Time.time;
                 timer = nightDurationsInSeconds[currentDay];
+                SetNight();
             }
             // 현재가 밤이면 다음 낮으로 변경
             else
@@ -71,8 +103,8 @@ public class DayNightManager : MonoBehaviour, IUpdateObj
 
                 // 다음 낮과 밤의 시간을 가져옵니다.
                 currentDay = (currentDay + 1) % Mathf.Min(dayDurationsInSeconds.Count, nightDurationsInSeconds.Count);
-                Debug.Log(currentDay);
                 timer = dayDurationsInSeconds[currentDay];
+                SetDay();
             }
 
             // 스카이박스 변경을 허용
@@ -99,40 +131,58 @@ public class DayNightManager : MonoBehaviour, IUpdateObj
         }
     }
 
-    private IEnumerator RotateUI()
+    private IEnumerator RotateToNightOrDay(bool isDayNight)
     {
-        while (true)
-        {
-            if (isRotating)
-            {
-                // 회전 애니메이션
-                if (rotationTimer < rotationDuration)
-                {
-                    float t = rotationTimer / rotationDuration;
-                    nightIcon.localRotation = Quaternion.Lerp(initialNightRotation, Quaternion.Euler(0f, 0f, 0f), t);
-                    dayIcon.localRotation = Quaternion.Lerp(initialDayRotation, Quaternion.Euler(0f, 0f, 180f), t);
-                    rotationTimer += Time.deltaTime;
-                }
-                else
-                {
-                    // 서서히 회전이 완료되면 대기 타이머를 시작하고 회전 상태를 변경
-                    delayTimer += Time.deltaTime;
-                    if (delayTimer >= delayBeforeInstantRotation)
-                    {
-                        isRotating = false;
-                    }
-                }
-            }
-            else
-            {
-                // 한 번에 아이콘을 회전시킴
-                if (isNight)
-                    SetDay();
-                else
-                    SetNight();
-            }
+        //this.isDay = isDayNight;
+        isRotating = true;
 
+        // 천천히 회전
+        float startRotation = dayNightIcon.localRotation.eulerAngles.z;
+        float targetRotation = isDayNight ? 180f : 0f;
+        float elapsedTime = 0f;
+
+        // 천천히 회전
+        while (elapsedTime < rotationDuration)
+        {
+            float t = elapsedTime / rotationDuration;
+            float currentRotation = Mathf.Lerp(startRotation, targetRotation, t);
+            dayNightIcon.localRotation = Quaternion.Euler(0f, 0f, currentRotation);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        // 마지막에 확 변하는 애니메이션
+        float finalRotationStartTime = Time.time;
+        float finalRotationEndTime = finalRotationStartTime + finalRotationDuration;
+        while (Time.time < finalRotationEndTime)
+        {
+            float t = (Time.time - finalRotationStartTime) / finalRotationDuration;
+            dayNightIcon.localRotation = Quaternion.Euler(0f, 0f, Mathf.Lerp(targetRotation, startRotation, t));
+            yield return null;
+        }
+
+        // 애니메이션 완료
+        dayNightIcon.localRotation = Quaternion.Euler(0f, 0f, targetRotation);
+        isUIRotating = false;
+    }
+    
+    private void SetDay()
+    {
+        StartCoroutine(RotateToNightOrDay(false)); // 아침 방향으로 회전
+    }
+
+    private void SetNight()
+    {
+        StartCoroutine(RotateToNightOrDay(true)); // 밤 방향으로 회전
+    }
+
+    private void DayUISet()
+    {
+        dayTimer.text = "Day " + (1 + currentDay).ToString();
+    }
+
+    private void EventChecker()
+    {
+        
     }
 }
