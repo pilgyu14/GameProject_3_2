@@ -24,22 +24,6 @@ public class AIMoveModule : AbBaseModule
         navMeshAgent.Move(_dir); 
     }
 
-    public Transform testTrm;
-
-    [ContextMenu("테스트 무브")]
-    public void MoveTest()
-    {
-        navMeshAgent.SetDestination(testTrm.position);
-    }
-
-    public int testValue = 1;
-    public Vector3 movePos; 
-    [ContextMenu("테스트 무브2")]
-    public void MoveTest2()
-    {
-        navMeshAgent.Move(movePos);
-    }
-    
     public void MovePosition(Vector3 _pos)
     {
         navMeshAgent.SetDestination(_pos); 
