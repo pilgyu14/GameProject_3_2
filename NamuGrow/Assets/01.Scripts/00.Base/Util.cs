@@ -18,5 +18,14 @@ public class Util
             return mainCam; 
         }
     }
+
+    public static Vector3 ClickPos
+    {
+        get
+        {
+                return MainCam.ScreenToWorldPoint(Input.mousePosition);
+            
+        }
+    }
     
 }

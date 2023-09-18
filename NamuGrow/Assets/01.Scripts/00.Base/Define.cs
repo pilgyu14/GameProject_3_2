@@ -58,7 +58,9 @@ public enum TreeType
 public interface IDamagable
 {
     public void Damaged(float _damageAmount);
+    public MoveType MoveType { get;  }
     void Die(); 
+    public bool IsDied { get; set;  }
     float MaxHealth { get; set; }
     float CurHealth { get; set; }
 }

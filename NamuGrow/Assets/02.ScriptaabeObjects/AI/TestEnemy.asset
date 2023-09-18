@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   layerMaskPriority:
-    keyList: 
-    valueList: []
+    keyList: 00000000
+    valueList:
+    - serializedVersion: 2
+      m_Bits: 512
     serialized: 1
-  idleSpeed: 0
-  chaseSpeed: 0
-  chaseViewAngle: 0
-  chaseViewRadius: 0
-  patrolRadius: 0
-  attackAngle: 0
-  attackRadius: 0
+  idleSpeed: 1
+  chaseSpeed: 1
+  chaseViewAngle: 360
+  chaseViewRadius: 77.9
+  patrolRadius: 161.5
+  attackAngle: 94.7
+  attackRadius: 9.03

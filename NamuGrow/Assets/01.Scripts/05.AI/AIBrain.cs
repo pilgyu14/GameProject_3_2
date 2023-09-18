@@ -6,83 +6,25 @@ using System;
 using System.Linq;
 using Random = UnityEngine.Random;
 
-public class AIBrain<T>   where T : AbMainModule
+[Serializable]
+public class AIBrain : AbBaseModule
 {
-    private T owner = null; 
+    #region FSM
+
+    private AbMainModule owner = null; 
     [SerializeField] private AIDataSO aiDataSO;
-    private Dictionary<StateType, State<T>> _stateDic = new Dictionary<StateType, State<T>>();
+    private Dictionary<StateType, State> _stateDic = new Dictionary<StateType, State>();
 
 
-    private Vector3 targetPosition; 
-    private Transform target; 
-    private State<T> curState;
-    private State<T> prevState; 
+    private State curState;
+    private State prevState; 
     
-    private IdleState<T> idleState;
-    private ChaseState<T> chaseState;
-    private PatrolState<T> patrolState;
-    private AttackState<T> attackState;
+    private IdleState idleState;
+    private ChaseState chaseState;
+    private PatrolState patrolState;
+    private AttackState attackState;
 
-    private bool isCanChase; 
-    private bool isReachDestination;
-    private bool isCanAttack; 
-    private bool isControl; 
-    
-    
-    private Vector3 targetDir; 
-    #region 프로퍼티
-
-    public Vector3 TargetDir
-    {
-        get
-        {
-            if (target != null & owner != null)
-            {
-                targetDir = target.position - owner.transform.position;
-                return targetDir; 
-            }
-            Debug.LogError($"target : {target} owner : {owner} 입니다");
-            return Vector3.zero; 
-        }
-    }
-    public Transform Target
-    {
-        get => target;
-        set => target = value; 
-    }
-    public Vector3 TargetPosition
-    {
-        get => targetPosition;
-        set => targetPosition = value;
-    }
-
-    public bool IsCanAttack
-    {
-        get => isCanAttack;
-        set => isCanAttack = value; 
-    }
-    /// <summary>
-    /// 유저가 컨트롤 중인가 
-    /// </summary>
-    public bool IsControl
-    {
-        get => isControl;
-        set => isControl = value; 
-    }
-
-    public bool IsReachDestination
-    {
-        get => isReachDestination;
-        set => isReachDestination = value; 
-    }
-    public bool IsCanChase
-    {
-        get
-        {
-            return isCanChase;
-        }
-    }
-
+    protected AIConditions aiConditions; 
     public AIDataSO AiDataSo => aiDataSO; 
     
     #endregion
@@ -91,17 +33,19 @@ public class AIBrain<T>   where T : AbMainModule
     {
         this.aiDataSO = _aiDataSO; 
     }
-    public void InitOwner(T _owner)
+   
+    public override void InitMainModule(AbMainModule _mainModule)
     {
-        owner = _owner;
+        base.InitMainModule(_mainModule);
+        this.owner = _mainModule; 
     }
-    
+
     public void Start()
     {
-        idleState = new IdleState<T>();
-        chaseState = new ChaseState<T>();
-        attackState = new AttackState<T>(); 
-        patrolState = new PatrolState<T>(); 
+        idleState = new IdleState();
+        chaseState = new ChaseState();
+        attackState = new AttackState(); 
+        patrolState = new PatrolState(); 
         AddState(idleState);
         AddState(chaseState);
         AddState(attackState);
@@ -129,10 +73,10 @@ public class AIBrain<T>   where T : AbMainModule
     /// </summary>
     /// <param name="_stateType"></param>
     /// <returns></returns>
-    public State<T> GetState(StateType _stateType)
+    public State GetState(StateType _stateType)
     {
-        State<T> _state = null; 
-        if (_stateDic.ContainsKey(_stateType) == false)
+        State _state = null; 
+        if (_stateDic.ContainsKey(_stateType) == true)
         {
             _state = _stateDic[_stateType];
         }
@@ -159,20 +103,16 @@ public class AIBrain<T>   where T : AbMainModule
         _newState.Enter(); 
     }
 
-    protected void AddState(State<T> _newState)
+    protected void AddState(State _newState)
     {
-        if (_stateDic.ContainsKey(_newState.stateType) == false)
+        if (_stateDic.ContainsKey(_newState.StateType) == false)
         {
             _newState.Init(owner, this);
-            _stateDic.Add(_newState.stateType, _newState);
+            _stateDic.Add(_newState.StateType, _newState);
         }
     }
     #endregion
     
-    private void CheckChaseCondition()
-    {
-        
-    }
 
     #region 찾기 
     public void SearchForAttackTarget()
@@ -180,11 +120,11 @@ public class AIBrain<T>   where T : AbMainModule
         var _target = SearchForTarget(aiDataSO.attackRadius, aiDataSO.attackAngle);
         if (_target != null)
         {
-            isCanAttack = true; 
+            aiConditions.IsCanAttack = true; 
         }
         else
         {
-            isCanAttack = false; 
+            aiConditions.IsCanAttack = false;   
         }
     }
     
@@ -196,15 +136,15 @@ public class AIBrain<T>   where T : AbMainModule
         var _target = SearchForTarget(aiDataSO.chaseViewRadius, aiDataSO.chaseViewAngle);
         if (_target != null)
         {
-            isCanChase = true; 
+            aiConditions.IsCanChase = true; 
         }
         else
         {
-            isCanChase = false; 
+            aiConditions.IsCanChase = false; 
         }
-
-        Target = _target; 
+        aiConditions.Target = _target; 
     }
+
     /// <summary>
     /// 목표 찾기 
     /// </summary>
@@ -220,10 +160,11 @@ public class AIBrain<T>   where T : AbMainModule
             foreach (var col in targets)
             {
                 // 플레이어와 적의 거리를 계산합니다.
-                float distanceToPlayer = Vector3.Distance(col.transform.position, owner.transform.position);
+                //float distanceToPlayer = Vector3.Distance(col.transform.position, owner.transform.position);
 
                 // 시야각 내에 플레이어가 있고 감지 범위 내에 있다면 적을 목록에 추가합니다.
-                if (distanceToPlayer <= _findRadius && IsFieldOfView(col.transform, _findAngle))
+                // + 공격 가능한 적이라면 
+                if (/*distanceToPlayer <= _findRadius &&*/ IsFieldOfView(col.transform, _findAngle) && IsCanTargeting(col.transform) && CheckNotDied(col.transform))
                 {
                     nearbyEnemies.Add(col.transform);
                 }
@@ -236,6 +177,28 @@ public class AIBrain<T>   where T : AbMainModule
         return null; 
     }
 
+    private bool CheckNotDied(Transform _enemy)
+    {
+        return _enemy.GetComponent<IDamagable>().IsDied; 
+    }
+    /// <summary>
+    /// 지상 타입인지 공중 타입인지 파악해서 확인 
+    /// </summary>
+    /// <returns></returns>
+    private bool IsCanTargeting(Transform _enemy)
+    {
+        IDamagable _damagable = _enemy.GetComponent<IDamagable>();
+        if (_damagable != null)
+        {
+            if ((owner.UnitDataSO.groundAttack > 0 && _damagable.MoveType == MoveType.ground)
+                || (owner.UnitDataSO.airAttack > 0 && _damagable.MoveType == MoveType.air))
+            {
+                return true; 
+            }
+        }
+        Debug.Log("공격할 수 없는 대상 : " + _enemy.name);
+        return false; 
+    }
     /// <summary>
     /// 유닛의 시야 안에 있는가 
     /// </summary>
@@ -243,8 +206,8 @@ public class AIBrain<T>   where T : AbMainModule
     /// <returns></returns>
     private bool IsFieldOfView(Transform enemy, float _viewAngle)
     {
-        Vector3 directionToPlayer = owner.transform.position - enemy.position;
-        float angleToPlayer = Vector3.Angle(enemy.forward, directionToPlayer);
+        Vector3 directionToPlayer = enemy.position - owner.transform.position;
+        float angleToPlayer = Vector3.Angle(owner.transform.forward, directionToPlayer);
 
         // 시야각 내에 플레이어가 있는지 확인합니다.
         if (angleToPlayer < _viewAngle * 0.5f)
@@ -298,6 +261,5 @@ public class AIBrain<T>   where T : AbMainModule
         return priority;
     }
     #endregion
-    
 
 }

@@ -36,6 +36,17 @@ public class GlobalSelection : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (selected_table.selectedDic.Count > 0)
+            {
+                foreach (var _selectUnit in selected_table.selectedDic)
+                {
+                    var _unit = _selectUnit.Value.GetComponent<AbMainModule>(); 
+                    _unit.GetModule<AIMoveModule>(ModuleType.AIMove).MovePosition(Util.ClickPos);
+                }
+            }
+        }
         //1. when left mouse button clicked (but not released)
         // 좌클릭시 포지션 받고 
         if (Input.GetMouseButtonDown(0))

@@ -8,21 +8,32 @@ public enum ModuleType
 {
     Move,
     AIMove,
+    AI,
+    AICondition, 
+    Attack
 }
 public class AbMainModule : MonoBehaviour
 {
     [SerializeField] protected string unitDataSoAddress = ""; 
-    [field:SerializeField] public UnitDataSO UnitDatUaSO { get; set;  }  
+    [field:SerializeField] public UnitDataSO UnitDataSO { get; set;  }  
     public Dictionary<ModuleType, AbBaseModule> ModuleDic { get; set; } = new Dictionary<ModuleType, AbBaseModule>();
 
     protected virtual void Awake()
     {
-        UnitDatUaSO ??= AddressablesManager.Instance.GetResource<UnitDataSO>(unitDataSoAddress);
+        UnitDataSO ??= AddressablesManager.Instance.GetResource<UnitDataSO>(unitDataSoAddress);
     }
     protected virtual void Start()
     {
+        InitMainModules(); 
     }
 
+    protected void InitMainModules()
+    {
+        foreach (var _module in ModuleDic)
+        {
+            _module.Value.InitMainModule(this);
+        }
+    }
     public T GetModule<T>(ModuleType _moduleType) where T : AbBaseModule
     {
         if (ModuleDic.TryGetValue(_moduleType, out AbBaseModule _module) == true)

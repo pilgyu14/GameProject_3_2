@@ -17,8 +17,24 @@ public class UnitDataSO : ScriptableObject
     public float airAttack;
     public float attackSpeed;
     
+    // 광역 공격 
+    
     public MoveType moveType;
     public float moveSpeed;
 
-    // UI Data 
+    // UI Data
+
+    public float GetAttackAmount(MoveType _moveType)
+    {
+        if (_moveType == MoveType.air)
+        {
+            return airAttack; 
+        }
+        else if (_moveType == MoveType.ground)
+        {
+            return groundAttack; 
+        }
+
+        return 0; 
+    }
 }
