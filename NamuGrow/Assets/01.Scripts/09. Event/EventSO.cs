@@ -7,10 +7,14 @@ using UnityEngine.UIElements;
 [CreateAssetMenu(menuName = "SO/Evnet/EventSO")]
 public class EventSO : ScriptableObject
 {
-    public string text;
+    public string nameText;
 
     public List<int> acceptOffer = new List<int>(new int[3]);
     public List<int> rejectionOffer = new List<int>(new int[3]);
-    
-    
+
+    public string inGameStory;
+
+    public string eventType;
+
+    public string[] eventText;
 }
