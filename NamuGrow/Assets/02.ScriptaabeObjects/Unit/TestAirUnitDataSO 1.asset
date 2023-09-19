@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2edffd16695eb074ebd5b9b29ef86107, type: 3}
-  m_Name: TestUnitDataSO
+  m_Name: TestAirUnitDataSO 1
   m_EditorClassIdentifier: 
   togetherTime: -1
   hp: 100
   groundAttack: 10
   airAttack: 10
   attackSpeed: 0.1
-  moveType: 0
+  moveType: 1
   moveSpeed: 11

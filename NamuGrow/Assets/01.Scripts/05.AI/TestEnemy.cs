@@ -97,7 +97,20 @@ public class IdleState : State
     public override StateType NagativeType => StateType.Idle;
 
     private AIMoveModule aiMoveModule;
-    private AIConditions aiCondition; 
+    private AIConditions aiCondition;
+
+    private AIConditions AICondition
+    {
+        get
+        {
+            if (aiCondition == null)
+            {
+                aiCondition = owner.GetModule<AIConditions>(ModuleType.AICondition);
+            }
+
+            return aiCondition; 
+        }
+    }
     public override void Enter()
     {
         aiMoveModule ??= owner.GetModule<AIMoveModule>(ModuleType.AIMove);
@@ -111,7 +124,7 @@ public class IdleState : State
         // 추적 스테이트 변경 
         Debug.Log("IdleSate..");
         aiBrain.SearchForChaseTarget();
-        if (aiCondition.Target != null && aiCondition.IsCanChase)
+        if (AICondition.Target != null && AICondition.IsCanChase)
         {
             //aiMoveModule.MoveDir(aiBrain.TargetDir);
             aiBrain.ChangeState(PositiveType);
@@ -144,7 +157,7 @@ public class PatrolState : State
     }
 }
 
-public class TestEnemy : AbMainModule, IClickUnit, IDamagable
+public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
 {
     [SerializeField] private AIDataSO aiDataSO;
     [SerializeField]
@@ -162,21 +175,27 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable
     protected override void Awake()
     {
         base.Awake();
+        InitModules(); 
+
+        //aiBrain = GetComponent<AIBrain<TestEnemy>>(); 
+    }
+
+    protected override void InitModules()
+    {
         aiMoveModule = GetComponent<AIMoveModule>();
         AddModule(ModuleType.AIMove, aiMoveModule);
         aiBrain = GetComponent<AIBrain>();
         AddModule(ModuleType.AI, aiBrain);
         aiCondition = GetComponent<AIConditions>();
         AddModule(ModuleType.AICondition,aiCondition);
-   
-        //aiBrain = GetComponent<AIBrain<TestEnemy>>(); 
+        
+        base.InitModules();
     }
-
     protected override  void Start()
     {
         base.Start();
-        aiBrain.InitAIDataSO(aiDataSO);
-        aiBrain.Start();
+        InitHp(); 
+        //gameObject.layer =LayerMask.NameToLayer(aiDataSO.layerMask.ToString()); 
     }
 
     private void Update()
@@ -230,14 +249,28 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable
     }
 
     #region  IDamaable 구현
+
+    private void InitHp()
+    {
+        MaxHealth = UnitDataSO.hp;
+        CurHealth = MaxHealth;
+        IsDied = false; 
+    }
     public void Damaged(float _damageAmount)
     {
-        throw new NotImplementedException();
+        Debug.Log("피격 : " + _damageAmount);
+        float _curHp = CurHealth;
+        _curHp -= _damageAmount;
+        if (_curHp <= 0)
+        {
+            Die();
+        }
     }
 
-    public MoveType MoveType { get; }
+    public MoveType MoveType => UnitDataSO.moveType; 
     public void Die()
     {
+        PoolManager.Instance.Push(gameObject);
         // 삭제 
     }
 
@@ -245,5 +278,9 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable
     [field: SerializeField] public float MaxHealth { get; set; } 
     [field: SerializeField] public float CurHealth { get; set; }
     #endregion
-   
+
+    public void Reset()
+    {
+        InitHp(); 
+    }
 }

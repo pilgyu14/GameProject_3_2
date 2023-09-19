@@ -11,7 +11,6 @@ public class AIBrain : AbBaseModule
 {
     #region FSM
 
-    private AbMainModule owner = null; 
     [SerializeField] private AIDataSO aiDataSO;
     private Dictionary<StateType, State> _stateDic = new Dictionary<StateType, State>();
 
@@ -37,10 +36,10 @@ public class AIBrain : AbBaseModule
     public override void InitMainModule(AbMainModule _mainModule)
     {
         base.InitMainModule(_mainModule);
-        this.owner = _mainModule; 
+        aiConditions = _mainModule.GetModule<AIConditions>(ModuleType.AICondition);
     }
 
-    public void Start()
+    protected override void Start()
     {
         idleState = new IdleState();
         chaseState = new ChaseState();
@@ -50,6 +49,8 @@ public class AIBrain : AbBaseModule
         AddState(chaseState);
         AddState(attackState);
         AddState(patrolState);
+        
+        
         ChangeState(StateType.Idle);
         
     }
@@ -60,9 +61,17 @@ public class AIBrain : AbBaseModule
     }
 
     #region  FSM
+
+    private void InitStates()
+    {
+        foreach (var _state in _stateDic)
+        {
+            _state.Value.Init(mainModule,this);
+        }
+    }
     private void RunAI()
     {
-        if (owner != null)
+        if (mainModule != null)
         {
             curState.Update();
         }
@@ -107,7 +116,7 @@ public class AIBrain : AbBaseModule
     {
         if (_stateDic.ContainsKey(_newState.StateType) == false)
         {
-            _newState.Init(owner, this);
+            _newState.Init(mainModule, this);
             _stateDic.Add(_newState.StateType, _newState);
         }
     }
@@ -152,7 +161,7 @@ public class AIBrain : AbBaseModule
     /// <param name="_findAngle">찾을 시야각</param>
     public Transform SearchForTarget(float _findRadius, float _findAngle)
     {
-        Collider[] targets = Physics.OverlapSphere(owner.transform.position, _findRadius, aiDataSO.layerMask);
+        Collider[] targets = Physics.OverlapSphere(mainModule.transform.position, _findRadius, aiDataSO.layerMask);
 
         List<Transform> nearbyEnemies = new List<Transform>(); 
         if (targets.Length > 0)
@@ -190,8 +199,8 @@ public class AIBrain : AbBaseModule
         IDamagable _damagable = _enemy.GetComponent<IDamagable>();
         if (_damagable != null)
         {
-            if ((owner.UnitDataSO.groundAttack > 0 && _damagable.MoveType == MoveType.ground)
-                || (owner.UnitDataSO.airAttack > 0 && _damagable.MoveType == MoveType.air))
+            if ((mainModule.UnitDataSO.groundAttack > 0 && _damagable.MoveType == MoveType.ground)
+                || (mainModule.UnitDataSO.airAttack > 0 && _damagable.MoveType == MoveType.air))
             {
                 return true; 
             }
@@ -206,8 +215,8 @@ public class AIBrain : AbBaseModule
     /// <returns></returns>
     private bool IsFieldOfView(Transform enemy, float _viewAngle)
     {
-        Vector3 directionToPlayer = enemy.position - owner.transform.position;
-        float angleToPlayer = Vector3.Angle(owner.transform.forward, directionToPlayer);
+        Vector3 directionToPlayer = enemy.position - mainModule.transform.position;
+        float angleToPlayer = Vector3.Angle(mainModule.transform.forward, directionToPlayer);
 
         // 시야각 내에 플레이어가 있는지 확인합니다.
         if (angleToPlayer < _viewAngle * 0.5f)

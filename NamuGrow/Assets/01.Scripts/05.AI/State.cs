@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class State
+public abstract class State : ScriptableObject
 {
     public AbMainModule owner;
     public AIBrain aiBrain; 
@@ -15,7 +15,7 @@ public abstract class State
     public virtual void Init(AbMainModule _owner, AIBrain _aiBrain)
     {
         this.owner = _owner;
-        this.aiBrain = _aiBrain; 
+        this.aiBrain = _aiBrain;     
     }
 
     public abstract void Enter();

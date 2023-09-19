@@ -44,6 +44,10 @@ public class GlobalSelection : MonoBehaviour
                 {
                     var _unit = _selectUnit.Value.GetComponent<AbMainModule>(); 
                     _unit.GetModule<AIMoveModule>(ModuleType.AIMove).MovePosition(Util.ClickPos);
+                    // 도착함면 idle 
+                    // 공격 태세 
+                    // 정찰 태세 
+                    // 선택 가능 
                 }
             }
         }

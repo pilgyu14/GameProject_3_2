@@ -21,13 +21,13 @@ public class AbMainModule : MonoBehaviour
     protected virtual void Awake()
     {
         UnitDataSO ??= AddressablesManager.Instance.GetResource<UnitDataSO>(unitDataSoAddress);
+        //InitModules(); 
     }
     protected virtual void Start()
     {
-        InitMainModules(); 
     }
 
-    protected void InitMainModules()
+    protected virtual void InitModules()
     {
         foreach (var _module in ModuleDic)
         {

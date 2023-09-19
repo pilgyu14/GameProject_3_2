@@ -10,6 +10,8 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(menuName = "SO/AI/AIDataSO")]
 public class AIDataSO : ScriptableObject
 {
+    [Header("자기 자신 레이어 마스크")]
+    public LayerMask myLayerMask;
     [Header("타겟 레이어 마스크")]
     public LayerMask layerMask;
     [Header("우선순위 타겟 레이어 마스크 ( Key의 숫자가 높을 수록 높은 우선순위)")]

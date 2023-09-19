@@ -38,6 +38,7 @@ public class AttackModule : AbBaseModule
         {
             var _moveType  = _targetDamagable.MoveType;
             _targetDamagable.Damaged(mainModule.UnitDataSO.GetAttackAmount(_moveType));
+            Debug.Log("공격!");
         }
     }
 }
