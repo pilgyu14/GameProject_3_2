@@ -181,7 +181,7 @@ public class DayNightManager : MonoSingleton<DayNightManager>, IUpdateObj
     private void DayUISet()
     {
         dayTimer.text = "Day " + currentDay.ToString();
-        Debug.Log(currentDay);
+        //Debug.Log(currentDay);
     }
 
     private void EventChecker()
