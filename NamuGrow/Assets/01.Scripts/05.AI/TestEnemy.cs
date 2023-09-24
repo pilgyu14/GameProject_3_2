@@ -25,7 +25,10 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
     // 살짝 ai 모드 
     // 
     private GameObject selectMark;
-
+    private SkinnedMeshRenderer meshRenderer;
+    private Material dissolveMat;
+    private Collider col; 
+    
     [SerializeField]
     private TeamType teamType; 
     
@@ -36,8 +39,9 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
     protected override void Awake()
     {
         base.Awake();
-        InitModules(); 
-
+        InitModules();
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        dissolveMat = meshRenderer.material; 
         //aiBrain = GetComponent<AIBrain<TestEnemy>>(); 
     }
 
@@ -67,41 +71,24 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
     {
         aiBrain.Update();
     }
-   
-    private void OnDrawGizmos()
+
+    private void SetDissolve(float _value)
     {
-        if (aiBrain.AiDataSo == null) return; 
-        // 범위를 그립니다. (원 형태)
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, aiBrain.AiDataSo.chaseViewRadius);
-        // 시야각을 그립니다. (부채꼴 모양)
-        DrawCircularSector(Color.green, aiBrain.AiDataSo.chaseViewAngle, aiBrain.AiDataSo.chaseViewRadius);
-
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, aiBrain.AiDataSo.attackRadius);
-        DrawCircularSector(Color.green, aiBrain.AiDataSo.attackAngle, aiBrain.AiDataSo.attackRadius);
-
-
-        // 플레이어를 발견한 경우, 플레이어 쪽으로 선을 그립니다.
-        if (aiCondition.Target != null)
-        {   
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, aiCondition.Target.position);
-        }
+        dissolveMat.SetFloat("_Dissolve", _value);
+    }
+    private IEnumerator DieAnimation()
+    {
+        float _time = 0f;
+        while (_time < 1)
+        {
+            _time = Mathf.Clamp01(_time +Time.deltaTime);
+            SetDissolve(_time);
+            yield return null; 
+        } 
+        PoolManager.Instance.Push(gameObject);
+        // 죽음 설정 
     }
 
-    private void DrawCircularSector(Color _color, float _viewAngle, float _radius)
-    {
-        Gizmos.color = _color;
-        Vector3 forward = transform.forward;
-        Quaternion leftRotation = Quaternion.AngleAxis(-_viewAngle * 0.5f, Vector3.up);
-        Quaternion rightRotation = Quaternion.AngleAxis(_viewAngle * 0.5f, Vector3.up);
-        Vector3 leftRayDirection = leftRotation * forward;
-        Vector3 rightRayDirection = rightRotation * forward;
-        Gizmos.DrawLine(transform.position, transform.position + leftRayDirection * _radius);
-        Gizmos.DrawLine(transform.position, transform.position + rightRayDirection * _radius);
-    }
     [field:SerializeField]public bool IsClickUnit { get; set; }
     public void ClickUnit()
     {
@@ -136,7 +123,7 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
     public MoveType MoveType => UnitDataSO.moveType; 
     public void Die()
     {
-        PoolManager.Instance.Push(gameObject);
+        StartCoroutine(DieAnimation());
         // 삭제 
     }
 
@@ -147,6 +134,46 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
 
     public void Reset()
     {
-        InitHp(); 
+        InitHp();
+        SetDissolve(0f); 
     }
+
+    #region 디버그
+
+    private void OnDrawGizmos()
+    {
+        if (aiBrain.AiDataSo == null) return; 
+        // 범위를 그립니다. (원 형태)
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, aiBrain.AiDataSo.chaseViewRadius);
+        // 시야각을 그립니다. (부채꼴 모양)
+        DrawCircularSector(Color.green, aiBrain.AiDataSo.chaseViewAngle, aiBrain.AiDataSo.chaseViewRadius);
+
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, aiBrain.AiDataSo.attackRadius);
+        DrawCircularSector(Color.green, aiBrain.AiDataSo.attackAngle, aiBrain.AiDataSo.attackRadius);
+
+
+        // 플레이어를 발견한 경우, 플레이어 쪽으로 선을 그립니다.
+        if (aiCondition.Target != null)
+        {   
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, aiCondition.Target.position);
+        }
+    }
+
+    private void DrawCircularSector(Color _color, float _viewAngle, float _radius)
+    {
+        Gizmos.color = _color;
+        Vector3 forward = transform.forward;
+        Quaternion leftRotation = Quaternion.AngleAxis(-_viewAngle * 0.5f, Vector3.up);
+        Quaternion rightRotation = Quaternion.AngleAxis(_viewAngle * 0.5f, Vector3.up);
+        Vector3 leftRayDirection = leftRotation * forward;
+        Vector3 rightRayDirection = rightRotation * forward;
+        Gizmos.DrawLine(transform.position, transform.position + leftRayDirection * _radius);
+        Gizmos.DrawLine(transform.position, transform.position + rightRayDirection * _radius);
+    }
+
+    #endregion
 }

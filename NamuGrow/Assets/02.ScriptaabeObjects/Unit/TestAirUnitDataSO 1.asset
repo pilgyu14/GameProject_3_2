@@ -16,6 +16,6 @@ MonoBehaviour:
   hp: 100
   groundAttack: 10
   airAttack: 10
-  attackSpeed: 0.1
+  attackSpeed: 1
   moveType: 0
   moveSpeed: 11
