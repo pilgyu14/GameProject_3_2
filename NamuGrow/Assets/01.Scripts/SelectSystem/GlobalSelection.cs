@@ -57,6 +57,19 @@ public class GlobalSelection : MonoBehaviour
                     // 선택 가능 
                 }
             }
+
+            if (InputManager.Instance.CheckIsCanInput(KeyCode.S,InputType.KeyDown))
+            {
+                if (selected_table.selectedDic.Count > 0)
+                {
+                    foreach (var _selectUnit in selected_table.selectedDic.Dictionary)
+                    {
+                        var _unit = _selectUnit.Value.GetComponent<AbMainModule>(); 
+                        _unit.GetModule<AIBrain>(ModuleType.AI).ChangeState(StateType.Command); // 명령 받을 수 있는 상태로 옮기고 
+                        _unit.GetModule<AIMoveModule>(ModuleType.AIMove).ClearMove();
+                    }
+                }
+            }
         }
         //1. when left mouse button clicked (but not released)
         // 좌클릭시 포지션 받고 

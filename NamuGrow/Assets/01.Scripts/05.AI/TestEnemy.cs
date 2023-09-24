@@ -17,8 +17,9 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
 
     private AttackModule attackModule; 
     
-    private UnitAniamtion unitAnimation; 
-    
+    private UnitAniamtion unitAnimation;
+
+    private SkillModule skillModule; 
     // 플레이어 타입이면 
     // 명령을 받는다 
     // 
@@ -57,6 +58,8 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
         AddModule(ModuleType.AICondition,aiCondition);
         unitAnimation = GetComponentInChildren<UnitAniamtion>(); 
         AddModule(ModuleType.Animation, unitAnimation);
+        skillModule = GetComponentInChildren<SkillModule>();
+        AddModule(ModuleType.Skill, skillModule);
         
         base.InitModules();
     }

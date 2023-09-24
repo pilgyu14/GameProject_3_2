@@ -18,7 +18,7 @@ public class UnitAniamtion : AbBaseModule
     
     private void Awake()
     {
-        animator = GetComponent<Animator>(); 
+        animator = GetComponentInChildren<Animator>(); 
     }
     
     public void PlayMoveAnim(float _speed)

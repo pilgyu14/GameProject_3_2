@@ -12,6 +12,7 @@ public enum ModuleType
     AICondition, 
     Attack,
     Animation, 
+    Skill
 }
 public class AbMainModule : MonoBehaviour
 {
