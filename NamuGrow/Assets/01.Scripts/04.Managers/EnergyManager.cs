@@ -16,31 +16,34 @@ public class HaveEnergyData
 public class EnergyManager : MonoSingleton<EnergyManager>
 {
 
-    [SerializeField]
-    private HaveEnergyData haveEnergyData;
-    
+    //[SerializeField]
+    //private HaveEnergyData haveEnergyData;
+    public int sap;
+    public int sweetSap;
+    public int acorn;
+    public int kiwi;
 
     public int Sap
     {
-        get => haveEnergyData.sap;
-        set => haveEnergyData.sap = value; 
+        get => sap;
+        set => sap = value; 
     }
     public int SweetSap
     {
-        get => haveEnergyData.sweetSap;
-        set => haveEnergyData.sweetSap = value; 
+        get => sweetSap;
+        set => sweetSap = value; 
     }
     
     public int Acorn
     {
-        get => haveEnergyData.acorn;
-        set => haveEnergyData.acorn = value; 
+        get => acorn;
+        set => acorn = value; 
     }
     
     public int Kiwi
     {
-        get => haveEnergyData.kiwi;
-        set => haveEnergyData.kiwi = value; 
+        get => kiwi;
+        set => kiwi = value; 
     }
 
     public bool RemoveEnergy(EnergyType _energyType, int _amount)

@@ -52,9 +52,12 @@ public class DayNightManager : MonoSingleton<DayNightManager>, IUpdateObj
 
     public List<EventSO> EventSOList = new List<EventSO>();
 
+    private EventUIManager eventUIManager;
+    
     private void Awake()
     {
         UpdateManager.Instance.AddUpdateObj(this);
+        eventUIManager = EventUIManager.Instance;
         
         // 초기 설정을 첫 번째 낮으로 설정
         isDay = false;
@@ -107,6 +110,7 @@ public class DayNightManager : MonoSingleton<DayNightManager>, IUpdateObj
                 currentDay = (currentDay + 1) % Mathf.Min(dayDurationsInSeconds.Count, nightDurationsInSeconds.Count);
                 timer = dayDurationsInSeconds[currentDay];
                 SetDay();
+                eventUIManager.ShowEvent(currentDay - 1);
             }
 
             // 스카이박스 변경을 허용

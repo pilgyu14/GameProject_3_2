@@ -10,6 +10,11 @@ public class EventUIButton : MonoBehaviour
     public float spiderFloat;
     public float beeFloat;
     public float antFloat;
+
+    public int sap;
+    public int sweetSap;
+    public int acorn;
+    public int kiwi;
     
     private float currentSpiderFloat;
     private float currentBeeFloat;
@@ -23,11 +28,27 @@ public class EventUIButton : MonoBehaviour
     public Image beeFill;
     public Image antFill;
 
+    private EventUIManager eventUIManager;
+    private EnergyManager energyManager;
+
+    private void Awake()
+    {
+        eventUIManager = EventUIManager.Instance;
+        energyManager = EnergyManager.Instance;
+    }
+
     private void Start()
     {
         currentSpiderFloat = spider.value;
         currentBeeFloat = bee.value;
         currentAntFloat = ant.value;
+
+        if (sap > energyManager.Sap)
+        {
+            
+        }
+        
+        this.gameObject.GetComponent<Button>().onClick.AddListener(()=>eventUIManager.CloseEvent(spiderFloat, beeFloat, antFloat, sap, sweetSap, acorn, kiwi));
     }
 
 
