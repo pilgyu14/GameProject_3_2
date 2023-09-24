@@ -365,6 +365,10 @@ MonoBehaviour:
   spiderFloat: 0.03
   beeFloat: -0.02
   antFloat: -0.01
+  sap: 0
+  sweetSap: 0
+  acorn: -10
+  kiwi: 0
   spider: {fileID: 321387090076975765}
   bee: {fileID: 1437409244749962272}
   ant: {fileID: 663015088206293321}
@@ -888,6 +892,10 @@ MonoBehaviour:
   spiderFloat: -0.5
   beeFloat: 0.01
   antFloat: -0.03
+  sap: 0
+  sweetSap: 0
+  acorn: -5
+  kiwi: 0
   spider: {fileID: 321387090076975765}
   bee: {fileID: 1437409244749962272}
   ant: {fileID: 663015088206293321}
@@ -2079,7 +2087,7 @@ RectTransform:
   m_Children:
   - {fileID: 8744619306864447869}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

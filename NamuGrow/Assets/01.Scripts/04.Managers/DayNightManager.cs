@@ -110,6 +110,7 @@ public class DayNightManager : MonoSingleton<DayNightManager>, IUpdateObj
                 currentDay = (currentDay + 1) % Mathf.Min(dayDurationsInSeconds.Count, nightDurationsInSeconds.Count);
                 timer = dayDurationsInSeconds[currentDay];
                 SetDay();
+                
                 eventUIManager.ShowEvent(currentDay - 1);
             }
 

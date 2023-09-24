@@ -601,6 +601,10 @@ MonoBehaviour:
   spiderFloat: -0.05
   beeFloat: 0.01
   antFloat: -0.03
+  sap: 0
+  sweetSap: 0
+  acorn: 0
+  kiwi: 0
   spider: {fileID: 6421232965651015592}
   bee: {fileID: 3561629938823609283}
   ant: {fileID: 7540013830923178230}
@@ -1217,6 +1221,10 @@ MonoBehaviour:
   spiderFloat: 0.01
   beeFloat: -0.01
   antFloat: 0.03
+  sap: 0
+  sweetSap: 0
+  acorn: 5
+  kiwi: 0
   spider: {fileID: 6421232965651015592}
   bee: {fileID: 3561629938823609283}
   ant: {fileID: 7540013830923178230}
