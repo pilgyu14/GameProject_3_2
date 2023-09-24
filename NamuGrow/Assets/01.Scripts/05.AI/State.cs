@@ -25,4 +25,4 @@ public abstract class State : ScriptableObject
     public virtual void AnimationTriggerEvent(AnimationTriggerType _animationTriggerType)
     {
     }
-}
+}   

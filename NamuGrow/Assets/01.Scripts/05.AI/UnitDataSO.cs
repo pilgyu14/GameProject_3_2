@@ -12,13 +12,16 @@ public class UnitDataSO : ScriptableObject
 
     public TogetherTime togetherTime;
 
+    [Space(10), Header("유닛 스탯")]
     public float hp; 
+    [Header("*값이 0이면 공격할 수 없음")]
     public float groundAttack;
     public float airAttack;
+    
     public float attackSpeed;
     
     // 광역 공격 
-    
+    [Header("이동 타입")]
     public MoveType moveType;
     public float moveSpeed;
 

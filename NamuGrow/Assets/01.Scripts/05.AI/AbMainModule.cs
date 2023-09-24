@@ -10,7 +10,8 @@ public enum ModuleType
     AIMove,
     AI,
     AICondition, 
-    Attack
+    Attack,
+    Animation, 
 }
 public class AbMainModule : MonoBehaviour
 {

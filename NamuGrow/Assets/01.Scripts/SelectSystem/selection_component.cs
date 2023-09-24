@@ -16,20 +16,20 @@ public class selection_component : MonoBehaviour
     
     void Start()
     {
-        renderer = GetComponent<Renderer>();
-        DefaultColor = renderer.material.color;
-        renderer.material.color = Color.red;
+        //renderer = GetComponent<Renderer>();
+        //DefaultColor = renderer.material.color;
+        //renderer.material.color = Color.red;
 
         if (selectionDecalPrefab == null)
         {
-            selectionDecalPrefab = AddressablesManager.Instance.GetResource<GameObject>(decalAddress);
+           // selectionDecalPrefab = AddressablesManager.Instance.GetResource<GameObject>(decalAddress);
         }
 
-        Instantiate(selectionDecalPrefab, transform); 
+     //   Instantiate(selectionDecalPrefab, transform); 
     }
 
     private void OnDestroy()
     {
-        renderer.material.color = DefaultColor;
+        //renderer.material.color = DefaultColor;
     }
 }

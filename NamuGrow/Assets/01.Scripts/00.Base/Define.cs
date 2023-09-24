@@ -89,8 +89,16 @@ public enum StateType
     Damaged, 
     Battle, 
     Died, 
+    Command,
 }
 
+public enum TeamType
+{
+    Player, 
+    Spider, 
+    Bee, 
+    Ant, 
+}
 public enum AnimationTriggerType
 {
     

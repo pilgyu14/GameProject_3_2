@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SelectedDictionary : MonoBehaviour
 {
-    public Dictionary<int, GameObject> selectedDic = new Dictionary<int, GameObject>();
+    public IntSelectionUnitDic selectedDic = new IntSelectionUnitDic(); 
 
     /// <summary>
     /// InstanceID 를 키값으로 Dictionary에 저장 후
@@ -17,15 +17,16 @@ public class SelectedDictionary : MonoBehaviour
 
         if (selectedDic.ContainsKey(id) == false)
         {
-            selectedDic.Add(id, go);
-            go.AddComponent<selection_component>();
+            var _mark = go.GetComponent<SelectionUnit>(); 
+            selectedDic.Add(id, _mark);
+            _mark.ActiveSelectedMark(true);
             Debug.Log("Added " + id + " to selected dict");
         }
     }
 
     public void Deselect(int id)
     {
-        Destroy(selectedDic[id].GetComponent<selection_component>());
+        selectedDic[id].ActiveSelectedMark(false);
         selectedDic.Remove(id);
     }
 
@@ -34,11 +35,11 @@ public class SelectedDictionary : MonoBehaviour
     /// </summary>
     public void DeselectAll()
     {
-        foreach(KeyValuePair<int,GameObject> pair in selectedDic)
+        foreach(KeyValuePair<int,SelectionUnit> pair in selectedDic.Dictionary)
         {
             if(pair.Value != null)
             {
-                Destroy(selectedDic[pair.Key].GetComponent<selection_component>());
+                pair.Value.ActiveSelectedMark(false);
             }
         }
         selectedDic.Clear();

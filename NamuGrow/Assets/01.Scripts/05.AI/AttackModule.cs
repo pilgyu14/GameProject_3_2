@@ -5,9 +5,11 @@ public class AttackModule : AbBaseModule
 {
     private AIConditions aiConditions;
 
+    private UnitAniamtion unitAnimation; 
     protected virtual void Start()
     {
         aiConditions ??= mainModule.GetModule<AIConditions>(ModuleType.AICondition);
+        unitAnimation = mainModule.GetModule<UnitAniamtion>(ModuleType.Animation);
     }
 
     /// <summary>
@@ -17,10 +19,8 @@ public class AttackModule : AbBaseModule
     {
         
     }
-    /// <summary>
-    /// 단일 근접 공격 
-    /// </summary>
-    public void MeleeAttack()
+
+    public void PeformMeleeAttack( )
     {
         // 타겟이 있는가
         // 때릴려하는데 죽는다면 
@@ -40,5 +40,15 @@ public class AttackModule : AbBaseModule
             _targetDamagable.Damaged(mainModule.UnitDataSO.GetAttackAmount(_moveType));
             Debug.Log("공격!");
         }
+    }
+    /// <summary>
+    /// 단일 근접 공격 
+    /// </summary>
+    public void MeleeAttack(bool _isAttack, float _attackSpeed = 1f)
+    {
+        // 애니메이션 실행
+        unitAnimation.PlayAttackAnim(_isAttack);
+        // 속도 설정 
+        unitAnimation.SetAttackAnimSpeed(_attackSpeed);
     }
 }

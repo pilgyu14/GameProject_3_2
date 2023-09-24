@@ -1,161 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using LSystem;
 using UnityEngine;
 using UnityEngine.AI;
-
-public class AttackState : State
-{
-    public override StateType StateType => StateType.Attack;
-    
-    public override StateType PositiveType { get; }
-    public override StateType NagativeType => StateType.Chase;
-
-    protected AIMoveModule aiMoveModule = null; 
-    protected AIConditions aiCondition = null;
-    protected AttackModule attackModule = null; 
-    public override void Enter()
-    {
-        aiMoveModule ??= owner.GetModule<AIMoveModule>(ModuleType.AIMove);
-        aiCondition ??= owner.GetModule<AIConditions>(ModuleType.AICondition);
-        attackModule ??= owner.GetModule<AttackModule>(ModuleType.Attack);
-        aiMoveModule.ClearMove(); 
-        
-        attackModule.MeleeAttack();
-        
-    }
-
-    public override void Update()
-    {
-        Debug.Log("AttackState..");
-        aiBrain.SearchForAttackTarget();
-        if (aiCondition.IsCanAttack == false)
-        {
-            aiBrain.ChangeState(NagativeType);
-        }
-        // 타겟 지정하고 
-        // 지상인지 공중인지 체크 
-        // 모션 나오고 
-        // 데미지 입히기 
-        
-    }
-
-    public override void Exit()
-    {
-    }
-}
-
-
-public class ChaseState : State
-{
-    public override StateType StateType => StateType.Chase;
-    
-    public override StateType PositiveType => StateType.Attack;
-    public override StateType NagativeType => StateType.Idle;
-
-    private AIMoveModule aiMoveModule;
-    private AIConditions aiCondition; 
-
-    public override void Enter()
-    {
-        aiMoveModule = owner.GetModule<AIMoveModule>(ModuleType.AIMove);
-        aiCondition = owner.GetModule<AIConditions>(ModuleType.AICondition);
-        aiMoveModule.SetSpeed(aiBrain.AiDataSo.chaseSpeed);
-    }
-
-    public override void Update()
-    {
-        Debug.Log("ChaseState..");
-        //aiMoveModule.MoveDir(aiBrain.TargetDir * Time.deltaTime);
-        aiMoveModule.MovePosition(aiCondition.Target.position);
-        
-        aiBrain.SearchForChaseTarget();
-        aiBrain.SearchForAttackTarget();
-        if (aiCondition.IsCanAttack)
-        {
-            aiBrain.ChangeState(PositiveType);
-        }
-
-        if (aiCondition.IsCanChase == false)
-        {
-            aiBrain.ChangeState(NagativeType);
-
-        }
-    }
-
-    public override void Exit()
-    {
-    }
-}
-
-
-public class IdleState : State
-{
-    public override StateType StateType => StateType.Idle;
-
-    public override StateType PositiveType => StateType.Chase;
-    public override StateType NagativeType => StateType.Idle;
-
-    private AIMoveModule aiMoveModule;
-    private AIConditions aiCondition;
-
-    private AIConditions AICondition
-    {
-        get
-        {
-            if (aiCondition == null)
-            {
-                aiCondition = owner.GetModule<AIConditions>(ModuleType.AICondition);
-            }
-
-            return aiCondition; 
-        }
-    }
-    public override void Enter()
-    {
-        aiMoveModule ??= owner.GetModule<AIMoveModule>(ModuleType.AIMove);
-        aiCondition ??= owner.GetModule<AIConditions>(ModuleType.AICondition);
-        aiMoveModule.SetSpeed(aiBrain.AiDataSo.idleSpeed);
-    }
-
-    public override void Update()
-    {
-        // 거리 체크 
-        // 추적 스테이트 변경 
-        Debug.Log("IdleSate..");
-        aiBrain.SearchForChaseTarget();
-        if (AICondition.Target != null && AICondition.IsCanChase)
-        {
-            //aiMoveModule.MoveDir(aiBrain.TargetDir);
-            aiBrain.ChangeState(PositiveType);
-        }
-    }
-
-    public override void Exit()
-    {
-    }
-}
-
-
-public class PatrolState : State
-{
-    public override StateType StateType => StateType.Patrol; 
-    
-    public override StateType PositiveType { get; }
-    public override StateType NagativeType { get; }
-
-    public override void Enter()
-    {
-    }
-
-    public override void Update()
-    {
-    }
-
-    public override void Exit()
-    {
-    }
-}
 
 public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
 {
@@ -166,8 +14,21 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
     private AIConditions aiCondition; 
     
     private AIMoveModule aiMoveModule;
+
+    private AttackModule attackModule; 
     
-    private GameObject selectMark;  
+    private UnitAniamtion unitAnimation; 
+    
+    // 플레이어 타입이면 
+    // 명령을 받는다 
+    // 
+    // 살짝 ai 모드 
+    // 
+    private GameObject selectMark;
+
+    [SerializeField]
+    private TeamType teamType; 
+    
     // 프로퍼티 
     public AIBrain AIBrain => aiBrain;
 
@@ -184,10 +45,14 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
     {
         aiMoveModule = GetComponent<AIMoveModule>();
         AddModule(ModuleType.AIMove, aiMoveModule);
+        attackModule = GetComponent<AttackModule>(); 
+        AddModule(ModuleType.Attack, attackModule);
         aiBrain = GetComponent<AIBrain>();
         AddModule(ModuleType.AI, aiBrain);
         aiCondition = GetComponent<AIConditions>();
         AddModule(ModuleType.AICondition,aiCondition);
+        unitAnimation = GetComponentInChildren<UnitAniamtion>(); 
+        AddModule(ModuleType.Animation, unitAnimation);
         
         base.InitModules();
     }
@@ -261,7 +126,8 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
         Debug.Log("피격 : " + _damageAmount);
         float _curHp = CurHealth;
         _curHp -= _damageAmount;
-        if (_curHp <= 0)
+        CurHealth = Mathf.Clamp(_curHp, 0, MaxHealth);
+        if (CurHealth <= 0)
         {
             Die();
         }

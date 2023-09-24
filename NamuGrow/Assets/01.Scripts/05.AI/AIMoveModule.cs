@@ -7,26 +7,41 @@ public class AIMoveModule : AbBaseModule
 {
     private NavMeshAgent navMeshAgent;
 
+    private UnitAniamtion unitAniamtion; 
+    
     protected override void Awake()
     {
         base.Awake();
         navMeshAgent = GetComponent<NavMeshAgent>(); 
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        unitAniamtion = mainModule.GetModule<UnitAniamtion>(ModuleType.Animation);
+    }
+
+
+    public void LookTarget(Transform _target)
+    {
+    }
     [ContextMenu("멈춰")]
     public void ClearMove()
     {
         navMeshAgent.SetDestination(mainModule.transform.position);
     }
 
-    public void MoveDir(Vector3 _dir)
+    public Vector3 pos; 
+    [ContextMenu("이동")]
+    public void TestMove()
     {
-        navMeshAgent.Move(_dir); 
+        navMeshAgent.SetDestination(pos); 
+        unitAniamtion.PlayMoveAnim(navMeshAgent.velocity.sqrMagnitude);
     }
-
-    public void MovePosition(Vector3 _pos)
+public void MovePosition(Vector3 _pos)
     {
         navMeshAgent.SetDestination(_pos); 
+        unitAniamtion.PlayMoveAnim(navMeshAgent.velocity.sqrMagnitude);
         //navMeshAgent.Move(_pos); 
         //navMeshAgent.    T
     }
@@ -45,11 +60,4 @@ public class AIMoveModule : AbBaseModule
         }
         return true; 
     }
-    
-    
-    
-    
-    
-    
-    
 }

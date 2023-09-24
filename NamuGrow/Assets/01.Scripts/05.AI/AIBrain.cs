@@ -14,7 +14,6 @@ public class AIBrain : AbBaseModule
     [SerializeField] private AIDataSO aiDataSO;
     private Dictionary<StateType, State> _stateDic = new Dictionary<StateType, State>();
 
-
     private State curState;
     private State prevState; 
     
@@ -22,6 +21,7 @@ public class AIBrain : AbBaseModule
     private ChaseState chaseState;
     private PatrolState patrolState;
     private AttackState attackState;
+    private CommandState commandState;
 
     protected AIConditions aiConditions; 
     public AIDataSO AiDataSo => aiDataSO; 
@@ -44,12 +44,13 @@ public class AIBrain : AbBaseModule
         idleState = new IdleState();
         chaseState = new ChaseState();
         attackState = new AttackState(); 
-        patrolState = new PatrolState(); 
+        patrolState = new PatrolState();
+        commandState = new CommandState(); 
         AddState(idleState);
         AddState(chaseState);
         AddState(attackState);
         AddState(patrolState);
-        
+        AddState(commandState);
         
         ChangeState(StateType.Idle);
         
@@ -74,6 +75,7 @@ public class AIBrain : AbBaseModule
         if (mainModule != null)
         {
             curState.Update();
+            Debug.Log(curState.StateType);
         }
     }
     
@@ -188,7 +190,7 @@ public class AIBrain : AbBaseModule
 
     private bool CheckNotDied(Transform _enemy)
     {
-        return _enemy.GetComponent<IDamagable>().IsDied; 
+        return ! _enemy.GetComponent<IDamagable>().IsDied; 
     }
     /// <summary>
     /// 지상 타입인지 공중 타입인지 파악해서 확인 
