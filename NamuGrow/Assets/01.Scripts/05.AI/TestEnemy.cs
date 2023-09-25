@@ -47,7 +47,11 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable,ITeam
 
     public void ScoutUnit(TeamType _temType)
     {
-        TeamType = _temType; 
+        TeamType = _temType;
+        if (TeamType == TeamType.Player)
+        {
+            gameObject.layer = 1 << 9;
+        }
     }
 
     protected override void Awake()

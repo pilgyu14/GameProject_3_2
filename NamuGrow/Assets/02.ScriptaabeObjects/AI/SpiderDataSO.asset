@@ -30,4 +30,4 @@ MonoBehaviour:
   chaseViewRadius: 77.9
   patrolRadius: 182.6
   attackAngle: 94.7
-  attackRadius: 3
+  attackRadius: 2

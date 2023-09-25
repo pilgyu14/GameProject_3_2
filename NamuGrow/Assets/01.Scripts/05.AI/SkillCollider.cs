@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class SkillCollider : MonoBehaviour
 {
-    [SerializeField]
-    private TeamType teamType = TeamType.None;
+    [field:SerializeField]
+    private TeamType teamType => currentTeam.TeamType;
     private BoxCollider collider;
     private SkillSO skillSO;
 

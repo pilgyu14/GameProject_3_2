@@ -167,6 +167,7 @@ public class StringObjectDict : SerializableDictionary<string, object>
 [Serializable]public class EnergyIntDic : SerializableDictionary<EnergyType, int> { }
 [Serializable]public class IntLayerMaskDic : SerializableDictionary<int,LayerMask> { }
 [Serializable]public class IntSelectionUnitDic : SerializableDictionary<int,SelectionUnit> { }
+[Serializable]public class TeamTypeLayerMaskDic : SerializableDictionary<TeamType,LayerMask> { }
 
 
 

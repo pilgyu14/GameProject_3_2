@@ -31,6 +31,7 @@ public class AttackState : State
         // 스킬 사용중에는 막아야해 
         // 
         Debug.Log("AttackState..");
+        aiBrain.SearchForSkillTarget();
         if (CheckCanSkill() == true)
         {         
             return; 

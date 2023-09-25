@@ -182,7 +182,10 @@ public class AIBrain : AbBaseModule
     /// <param name="_findAngle">찾을 시야각</param>
     public Transform SearchForTarget(float _findRadius, float _findAngle)
     {
-        Collider[] targets = Physics.OverlapSphere(mainModule.transform.position, _findRadius, aiDataSO.layerMask);
+        var layer  = TargetSettingManager.Instance.GetLayerMask
+            (mainModule.GetComponent<ITeam>().TeamType);
+        Collider[] targets = Physics.OverlapSphere(mainModule.transform.position, _findRadius,layer
+            );
 
         List<Transform> nearbyEnemies = new List<Transform>(); 
         if (targets.Length > 0)

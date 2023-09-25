@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   togetherTime: -1
   hp: 100
-  groundAttack: 10
+  groundAttack: 0.01
   airAttack: 1
   attackSpeed: 1
   moveType: 0

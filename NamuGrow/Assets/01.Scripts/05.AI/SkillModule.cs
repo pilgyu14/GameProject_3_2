@@ -16,6 +16,7 @@ public class SkillModule : AbBaseModule
     {
         base.Start();
         unitAnimation ??= mainModule.GetModule<UnitAniamtion>(ModuleType.Animation);
+        aiConditions ??= mainModule.GetModule<AIConditions>(ModuleType.AICondition);
         hitCollider.Init(skillSO,mainModule.GetComponent<ITeam>());
         particleSystems = skillSO.effectParent.GetComponentsInChildren<ParticleSystem>(); 
     }
@@ -114,6 +115,7 @@ public class SkillModule : AbBaseModule
                 {
                     _particle.Stop();
                 }
+                yield break;
             }
         }
     }

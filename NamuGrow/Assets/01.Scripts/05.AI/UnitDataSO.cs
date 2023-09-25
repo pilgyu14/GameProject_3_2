@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "SO/Unit/UnitDataSO")]
 public class UnitDataSO : ScriptableObject
 {
     private string name;
-
-    private GoodsType goodsType;
-    private float goodsCount;
+        
+    public EnergyType energyType;
+    public float goodsCount;
 
     public TogetherTime togetherTime;
 
