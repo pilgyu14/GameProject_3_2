@@ -32,8 +32,18 @@ public class TreeInstallUIType : MonoBehaviour
         {
             treeInstallManager.InstallObjectSet(null);
         }
-        
+        // 
+
+        foreach (var _needEnergy in treeDataSo.CurLevelSoData.needEnergyDic.Dictionary)
+        {
+            if (EnergyManager.Instance.IsEnough(_needEnergy.Key, _needEnergy.Value) == false)
+            {
+                Debug.Log("자원이 부족합니다 ");
+                return; 
+            }
+        }
         insGameObeject = treeManager.FindTreeData(treeDataSo.treeType).treePrefab.gameObject;
+
         
         // 물체 높이 구하는 법. (메쉬 필터가 있는 오브젝트)
         /*meshFilter = insGameObeject.GetComponent<MeshFilter>();

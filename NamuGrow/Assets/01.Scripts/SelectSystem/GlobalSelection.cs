@@ -57,6 +57,19 @@ public class GlobalSelection : MonoBehaviour
                     // 선택 가능 
                 }
             }
+
+            if (InputManager.Instance.CheckIsCanInput(KeyCode.S,InputType.KeyDown))
+            {
+                if (selected_table.selectedDic.Count > 0)
+                {
+                    foreach (var _selectUnit in selected_table.selectedDic.Dictionary)
+                    {
+                        var _unit = _selectUnit.Value.GetComponent<AbMainModule>(); 
+                        _unit.GetModule<AIBrain>(ModuleType.AI).ChangeState(StateType.Command); // 명령 받을 수 있는 상태로 옮기고 
+                        _unit.GetModule<AIMoveModule>(ModuleType.AIMove).ClearMove();
+                    }
+                }
+            }
         }
         //1. when left mouse button clicked (but not released)
         // 좌클릭시 포지션 받고 
@@ -95,17 +108,21 @@ public class GlobalSelection : MonoBehaviour
                         // UI 데이터 설정 
                         // 함수 주고                          
                     }
-                    
-                    // 이미 선택중인 것에 추가 
-                    if (Input.GetKey(KeyCode.LeftShift)) //inclusive select
+
+                    IClickUnit _clickUnit = hit.transform.GetComponent<IClickUnit>();
+                    if (_clickUnit != null && _clickUnit.IsClickUnit == true)
                     {
-                        selected_table.AddSelected(hit.transform.gameObject);
-                    }
-                    // 기존 선택 배제하고 새로 선택 
-                    else //exclusive selected
-                    {
-                        selected_table.DeselectAll();
-                        selected_table.AddSelected(hit.transform.gameObject);
+                        // 이미 선택중인 것에 추가 
+                        if (Input.GetKey(KeyCode.LeftShift)) //inclusive select
+                        {
+                            selected_table.AddSelected(hit.transform.gameObject);
+                        }
+                        // 기존 선택 배제하고 새로 선택 
+                        else //exclusive selected
+                        {
+                            selected_table.DeselectAll();
+                            selected_table.AddSelected(hit.transform.gameObject);
+                        }
                     }
                 }
                 // 아무것도 없었다면 

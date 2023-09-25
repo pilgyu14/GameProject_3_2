@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeManager : MonoSingleton<TimeManager>
+public class TimeManager : MonoSingleton<TimeManager>, IUpdateObj
 {
     private class TimedFunction
     {
@@ -16,6 +16,16 @@ public class TimeManager : MonoSingleton<TimeManager>
     private readonly Dictionary<string, TimedFunction> timedFunctionsDic = new Dictionary<string, TimedFunction>();
 
 
+    
+    protected virtual void Start()
+    {
+        UpdateManager.Instance.AddUpdateObj(this);
+    }
+
+    private void OnDestroy()
+    {
+        UpdateManager.Instance.RemoveUpdateObj(this);
+    }
     /// <summary>
     /// 시간마다 함수 호출
     /// Seconds 가 0이면 한 번만 실행 
@@ -42,7 +52,8 @@ public class TimeManager : MonoSingleton<TimeManager>
         }
         Debug.Log(_key + "TImeManager 키가 없음");
     }
-    private void Update()
+
+    public void OnUpdate()
     {
         float currentTime = Time.time;
 
@@ -62,5 +73,13 @@ public class TimeManager : MonoSingleton<TimeManager>
                 }
             }
         }
+    }
+
+    public void OnLateUpdate()
+    {
+    }
+
+    public void OnFixedUpdate()
+    {
     }
 }

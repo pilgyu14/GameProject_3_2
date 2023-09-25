@@ -18,7 +18,7 @@ public class UnitAniamtion : AbBaseModule
     
     private void Awake()
     {
-        animator = GetComponent<Animator>(); 
+        animator = GetComponentInChildren<Animator>(); 
     }
     
     public void PlayMoveAnim(float _speed)
@@ -34,9 +34,9 @@ public class UnitAniamtion : AbBaseModule
     {
         animator.SetBool(attackHash, _isAttack);
     }    
-    public void PlaySkillAnim()
+    public void PlaySkillAnim(bool _isActive)
     {
-        animator.SetFloat(moveStr, skillHash);
+        animator.SetBool(skillHash, _isActive);
     }    
     public void PlayDieAnim()
     {

@@ -90,14 +90,21 @@ public enum StateType
     Battle, 
     Died, 
     Command,
+    Skill, 
 }
 
 public enum TeamType
 {
+    None,
     Player, 
     Spider, 
     Bee, 
     Ant, 
+}
+
+public interface ITeam
+{
+    public TeamType TeamType { get; set; }
 }
 public enum AnimationTriggerType
 {
