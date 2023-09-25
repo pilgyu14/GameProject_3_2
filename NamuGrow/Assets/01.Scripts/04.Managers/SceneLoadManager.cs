@@ -7,7 +7,7 @@ public class SceneLoadManager : MonoSingleton<SceneLoadManager>
 {
     public void LoadInGameScene()
     {
-        SceneManager.LoadSceneAsync("InGame");
-        SceneManager.LoadSceneAsync("UI_Test",LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("UI_Test");
+        SceneManager.LoadSceneAsync("InGame",LoadSceneMode.Additive);
     }
 }

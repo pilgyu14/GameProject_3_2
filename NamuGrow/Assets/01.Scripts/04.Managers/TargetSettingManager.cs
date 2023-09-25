@@ -33,7 +33,7 @@ public class TargetSettingManager : MonoSingleton<TargetSettingManager>
         int layerMask = 0; 
         foreach (var _layer in _layerList)
         {
-            layerMask += 1 << (int)_layer; 
+            layerMask +=(int)_layer; 
         }
 
         return layerMask; 

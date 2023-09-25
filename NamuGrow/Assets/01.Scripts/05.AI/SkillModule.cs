@@ -63,7 +63,11 @@ public class SkillModule : AbBaseModule
     /// </summary>
     public void PlayEffect()
     {
-        bool _isCanPerformSkill = aiConditions.IsCanSkill && !aiConditions.IsSkillCoolTime;
+        bool _isCanPerformSkill = false;
+        if (aiConditions.IsCanSkill == true && aiConditions.IsSkillCoolTime == false)
+        {
+            _isCanPerformSkill = true; 
+        }
         if (_isCanPerformSkill == true)
         {
             // 이펙트 나오고 
