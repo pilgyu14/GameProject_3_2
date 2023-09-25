@@ -15,7 +15,7 @@ MonoBehaviour:
   togetherTime: -1
   hp: 100
   groundAttack: 10
-  airAttack: 1
-  attackSpeed: 1
+  airAttack: 0
+  attackSpeed: 4
   moveType: 0
   moveSpeed: 11

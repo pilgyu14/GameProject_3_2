@@ -1215,7 +1215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &407433147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235,15 +1235,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407433146}
-  m_LocalRotation: {x: 0.52353984, y: 0, z: 0, w: 0.8520012}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 37.75, z: -16.6875}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2139907418}
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 63.14, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &407433149
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2123,7 +2123,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: 0aa37164acf594e03876b4e0b590280e, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -2611,11 +2611,11 @@ RectTransform:
   m_Father: {fileID: 34134760}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0.07, y: 0}
+  m_AnchorMax: {x: 0.93000007, y: 0.5733333}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 85.5383, y: 85.5383}
-  m_Pivot: {x: 0.5, y: 0}
+  m_SizeDelta: {x: -0.46170044, y: -0.46170044}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1117017063
 MonoBehaviour:
   m_ObjectHideFlags: 0

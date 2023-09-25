@@ -19,8 +19,8 @@ public class EventUIManager : MonoSingleton<EventUIManager>
     private void Awake()
     {
         spider = 0.5f;
-        bee = 0.6f;
-        ant = 0.55f;
+        bee = 0.5f;
+        ant = 0.5f;
 
         energyManager = EnergyManager.Instance;
     }

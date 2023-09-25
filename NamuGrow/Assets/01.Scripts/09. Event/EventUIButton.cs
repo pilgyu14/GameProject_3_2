@@ -39,18 +39,28 @@ public class EventUIButton : MonoBehaviour
 
     private void Start()
     {
-        currentSpiderFloat = spider.value;
-        currentBeeFloat = bee.value;
-        currentAntFloat = ant.value;
+        //currentSpiderFloat = spider.value;
+        //currentBeeFloat = bee.value;
+        //currentAntFloat = ant.value;
 
-        if (sap > energyManager.Sap)
-        {
-            
-        }
-        
         this.gameObject.GetComponent<Button>().onClick.AddListener(()=>eventUIManager.CloseEvent(spiderFloat, beeFloat, antFloat, sap, sweetSap, acorn, kiwi));
     }
 
+    private void Update()
+    {
+        
+    }
+
+    private void OnEnable()
+    {
+        spider.value = currentSpiderFloat = eventUIManager.spider;
+        bee.value = currentBeeFloat = eventUIManager.bee;
+        ant.value = currentAntFloat = eventUIManager.ant;
+        
+        ChangeColor(spider, spiderFill);
+        ChangeColor(bee, beeFill);
+        ChangeColor(ant, antFill);
+    }
 
     public void MouseEnter()
     {

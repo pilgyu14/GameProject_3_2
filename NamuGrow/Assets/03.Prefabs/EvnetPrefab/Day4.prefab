@@ -362,12 +362,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18042887d07b184dba8733bceba56c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderFloat: 0.03
-  beeFloat: -0.02
-  antFloat: -0.01
-  sap: 0
+  spiderFloat: -0.03
+  beeFloat: 0.05
+  antFloat: 0.1
+  sap: -10
   sweetSap: 0
-  acorn: -10
+  acorn: 0
   kiwi: 0
   spider: {fileID: 321387090076975765}
   bee: {fileID: 1437409244749962272}
@@ -889,12 +889,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18042887d07b184dba8733bceba56c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderFloat: -0.5
-  beeFloat: 0.01
-  antFloat: -0.03
+  spiderFloat: 0.07
+  beeFloat: -0.02
+  antFloat: -0.1
   sap: 0
   sweetSap: 0
-  acorn: -5
+  acorn: 0
   kiwi: 0
   spider: {fileID: 321387090076975765}
   bee: {fileID: 1437409244749962272}
@@ -1601,7 +1601,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC70\uBBF8 \uBC31\uC791"
+  m_text: "\uAC70\uBBF8 \uACF5\uC791"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71a2b439947c8e942b312c2511afa052, type: 2}
   m_sharedMaterial: {fileID: -2623345400572734905, guid: 71a2b439947c8e942b312c2511afa052, type: 2}
@@ -1736,8 +1736,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC1C\uBBF8\uC655\uAD6D\uC774 \uBAB0\uB798 \uBB34\uC5B8\uAC00\uB97C \uD6D4\uCE58\uACE0
-    \uC788\uC2B5\uB2C8\uB2E4."
+  m_text: "\uC65C \uB098\uD55C\uD14C\uB9CC \uADF8\uB7EC\uB294\uAC70\uC57C \uD2B9\uD788
+    \uBC8C \uB140\uC11D\uB4E4 \uB9DB\uB3C4 \uC5C6\uB294\uB370 \uB0B4\uAC00 \uBB50\uD558\uB7EC
+    \uC7A1\uC544\uBA39\uC5B4!\n\n\uBC8C \uB140\uC11D\uB4E4\uC5D0\uAC8C\uC11C \uBC1B\uC740
+    \uD0A4\uC704 \uC788\uC73C\uBA74 \uD558\uB098\uB9CC \uBE4C\uB824\uC918. \uAF2D
+    \uAC1A\uC744\uAC8C "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71a2b439947c8e942b312c2511afa052, type: 2}
   m_sharedMaterial: {fileID: -2623345400572734905, guid: 71a2b439947c8e942b312c2511afa052, type: 2}
@@ -2067,7 +2070,7 @@ GameObject:
   - component: {fileID: 8313940169572138256}
   - component: {fileID: 584450935068559079}
   m_Layer: 5
-  m_Name: EventCanvas2
+  m_Name: Day4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2300,7 +2303,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "  - \uC218\uC561 4L"
+  m_text: "- \uC218\uC561 10L"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71a2b439947c8e942b312c2511afa052, type: 2}
   m_sharedMaterial: {fileID: -2623345400572734905, guid: 71a2b439947c8e942b312c2511afa052, type: 2}
