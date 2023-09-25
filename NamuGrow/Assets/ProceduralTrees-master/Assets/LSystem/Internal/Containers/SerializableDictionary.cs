@@ -53,8 +53,17 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
     public void Add(TKey key, TValue value)
     {
         dictionary.Add(key, value);
+        keyList.Add(key);
+        valueList.Add(value);
     }
 
+    public void Remove(TKey key)
+    {
+        var _value = dictionary[key];
+        keyList.Remove(key);
+        valueList.Remove(_value);
+        dictionary.Remove(key);
+    }
     public TValue this[TKey key]
     {
         get
@@ -157,6 +166,7 @@ public class StringObjectDict : SerializableDictionary<string, object>
 [Serializable] public class StringColorDict : SerializableDictionary<string, Color> { }
 [Serializable]public class EnergyIntDic : SerializableDictionary<EnergyType, int> { }
 [Serializable]public class IntLayerMaskDic : SerializableDictionary<int,LayerMask> { }
+[Serializable]public class IntSelectionUnitDic : SerializableDictionary<int,SelectionUnit> { }
 
 
 

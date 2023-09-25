@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GlobalSelection : MonoBehaviour
@@ -17,7 +18,7 @@ public class GlobalSelection : MonoBehaviour
 
     MeshCollider selectionBox;
     Mesh selectionMesh;
-
+    
     Vector3 p1; // 첫 클릭 지점
     Vector3 p2; // 마우스 up 했을때 지점 
 
@@ -34,8 +35,29 @@ public class GlobalSelection : MonoBehaviour
         dragSelect = false;
     }
 
+    public GameObject TestObj; 
     void Update()
     {
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (selected_table.selectedDic.Count > 0)
+            {
+                foreach (var _selectUnit in selected_table.selectedDic.Dictionary)
+                {
+                    var _unit = _selectUnit.Value.GetComponent<AbMainModule>(); 
+                    _unit.GetModule<AIBrain>(ModuleType.AI).ChangeState(StateType.Command); // 명령 받을 수 있는 상태로 옮기고 
+                    Vector3 _clickPos = Util.ClickPos;
+                    /*GameObject a = Instantiate(TestObj);
+                        a.transform.position = _clickPos; */
+                    _unit.GetModule<AIMoveModule>(ModuleType.AIMove).MovePosition(_clickPos);// 명령 ㄱ 
+                    MovementMark.Instance.ActiveIcon(_clickPos);
+                    // 도착함면 idle 
+                    // 공격 태세 
+                    // 정찰 태세 
+                    // 선택 가능 
+                }
+            }
+        }
         //1. when left mouse button clicked (but not released)
         // 좌클릭시 포지션 받고 
         if (Input.GetMouseButtonDown(0))
@@ -140,7 +162,7 @@ public class GlobalSelection : MonoBehaviour
                     selected_table.DeselectAll();
                 }
 
-               Destroy(selectionBox, 0.02f);
+               Destroy(selectionBox, 1f);
 
             }//end marquee select
 
@@ -150,6 +172,7 @@ public class GlobalSelection : MonoBehaviour
        
     }
 
+    public Material mat; 
     private void OnGUI()
     {
         // 드래그 선택이라면
@@ -217,6 +240,7 @@ public class GlobalSelection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("@@@충돌 : " + other.name );
         selected_table.AddSelected(other.gameObject);
     }
 

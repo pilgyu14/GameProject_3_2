@@ -58,9 +58,21 @@ public enum TreeType
 public interface IDamagable
 {
     public void Damaged(float _damageAmount);
+    public MoveType MoveType { get;  }
     void Die(); 
+    public bool IsDied { get; set;  }
     float MaxHealth { get; set; }
     float CurHealth { get; set; }
+}
+
+/// <summary>
+/// 클릭되는 유닛인가 (아군인가) 
+/// </summary>
+public interface IClickUnit
+{
+    public bool IsClickUnit { get; set; }
+    public void ClickUnit();
+    public void CancelClickUnit(); 
 }
 
 public interface IAIAgent
@@ -77,8 +89,16 @@ public enum StateType
     Damaged, 
     Battle, 
     Died, 
+    Command,
 }
 
+public enum TeamType
+{
+    Player, 
+    Spider, 
+    Bee, 
+    Ant, 
+}
 public enum AnimationTriggerType
 {
     

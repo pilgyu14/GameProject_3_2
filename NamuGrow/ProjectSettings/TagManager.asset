@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ground
   - Ghost
   - RestrictedArea
-  - 
-  - 
-  - 
+  - PlayerTeam
+  - Enemy1Team
+  - Enemy2Team
   - 
   - 
   - 

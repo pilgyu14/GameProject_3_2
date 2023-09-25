@@ -1,21 +1,21 @@
-
+    
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class State<T> where T : AbMainModule 
+public abstract class State : ScriptableObject
 {
-    public T owner;
-    public AIBrain<T> aiBrain; 
-    public StateType stateType;
+    public AbMainModule owner;
+    public AIBrain aiBrain; 
+    public abstract StateType StateType { get;  }
     
     public abstract StateType PositiveType { get; }
     public abstract StateType NagativeType { get; }
 
-    public virtual void Init(T _owner, AIBrain<T> _aiBrain)
+    public virtual void Init(AbMainModule _owner, AIBrain _aiBrain)
     {
         this.owner = _owner;
-        this.aiBrain = _aiBrain; 
+        this.aiBrain = _aiBrain;     
     }
 
     public abstract void Enter();
@@ -25,4 +25,4 @@ public abstract class State<T> where T : AbMainModule
     public virtual void AnimationTriggerEvent(AnimationTriggerType _animationTriggerType)
     {
     }
-}
+}   

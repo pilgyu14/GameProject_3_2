@@ -3,52 +3,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 using Random = UnityEngine.Random;
 
-public class AIBrain<T>  where T : AbMainModule
+[Serializable]
+public class AIBrain : AbBaseModule
 {
-    private T owner = null; 
+    #region FSM
+
     [SerializeField] private AIDataSO aiDataSO;
-    private Dictionary<StateType, State<T>> _stateDic = new Dictionary<StateType, State<T>>();
-    
-    
-    private Transform target; 
-    private State<T> curState;
-    private State<T> prevState; 
-    
-    private IdleState<T> idleState;
-    private ChaseState<T> chaseState;
-    private PatrolState<T> patrolState;
-    private AttackState<T> attackState;
+    private Dictionary<StateType, State> _stateDic = new Dictionary<StateType, State>();
 
-    #region 프로퍼티
-
-    private bool isCanChase; 
-    public bool IsCanChase
-    {
-        get
-        {
-            return isCanChase;
-        }
-    }
+    private State curState;
+    private State prevState; 
     
+    private IdleState idleState;
+    private ChaseState chaseState;
+    private PatrolState patrolState;
+    private AttackState attackState;
+    private CommandState commandState;
+
+    protected AIConditions aiConditions; 
+    public AIDataSO AiDataSo => aiDataSO; 
     
     #endregion
-    
-    public void InitOwner(T _owner)
+
+    public void InitAIDataSO(AIDataSO _aiDataSO)
     {
-        owner = _owner;
+        this.aiDataSO = _aiDataSO; 
     }
-    public void Start()
+   
+    public override void InitMainModule(AbMainModule _mainModule)
     {
-        idleState = new IdleState<T>();
-        chaseState = new ChaseState<T>();
-        attackState = new AttackState<T>(); 
-        patrolState = new PatrolState<T>(); 
+        base.InitMainModule(_mainModule);
+        aiConditions = _mainModule.GetModule<AIConditions>(ModuleType.AICondition);
+    }
+
+    protected override void Start()
+    {
+        idleState = new IdleState();
+        chaseState = new ChaseState();
+        attackState = new AttackState(); 
+        patrolState = new PatrolState();
+        commandState = new CommandState(); 
         AddState(idleState);
         AddState(chaseState);
         AddState(attackState);
         AddState(patrolState);
+        AddState(commandState);
+        
         ChangeState(StateType.Idle);
         
     }
@@ -57,72 +60,34 @@ public class AIBrain<T>  where T : AbMainModule
         RunAI();
         
     }
+
+    #region  FSM
+
+    private void InitStates()
+    {
+        foreach (var _state in _stateDic)
+        {
+            _state.Value.Init(mainModule,this);
+        }
+    }
     private void RunAI()
     {
-        if (owner != null)
+        if (mainModule != null)
         {
             curState.Update();
+            Debug.Log(curState.StateType);
         }
     }
-
-    private void CheckTarget()
-    {
-        
-    }
-    private void CheckChaseCondition()
-    {
-        
-    }
-    
-    private void SearchForTargets()
-    {
-        /*Collider[] targets = Physics.OverlapSphere(transform.position, detectionRadius, targetLayer);
-        
-        if (targets.Length > 0)
-        {
-            Transform selectedTarget = SelectTarget(targets);
-            if (selectedTarget != null)
-            {
-                navMeshAgent.SetDestination(selectedTarget.position);
-            }
-        }*/
-    }
-
-    private Transform SelectTarget(Collider[] targets)
-    {
-        Transform bestTarget = null;
-        float highestPriority = float.MinValue;
-
-        foreach (Collider target in targets)
-        {
-            float priority = CalculatePriority(target.gameObject);
-            if (priority > highestPriority)
-            {
-                highestPriority = priority;
-                bestTarget = target.transform;
-            }
-        }
-
-        return bestTarget;
-    }
-
-    private float CalculatePriority(GameObject target)
-    {
-        // Implement your priority calculation logic here
-        // For example, distance to target, type of target, etc.
-        return Random.Range(0f, 1f);
-    }
-    
     
     /// <summary>
     /// 상태 받아오기 
     /// </summary>
     /// <param name="_stateType"></param>
     /// <returns></returns>
-    public State<T> GetState(StateType _stateType)
+    public State GetState(StateType _stateType)
     {
-        State<T> _state = null; 
-        if (_stateDic.ContainsKey(_stateType) == false)
+        State _state = null; 
+        if (_stateDic.ContainsKey(_stateType) == true)
         {
             _state = _stateDic[_stateType];
         }
@@ -149,12 +114,163 @@ public class AIBrain<T>  where T : AbMainModule
         _newState.Enter(); 
     }
 
-    protected void AddState(State<T> _newState)
+    protected void AddState(State _newState)
     {
-        if (_stateDic.ContainsKey(_newState.stateType) == false)
+        if (_stateDic.ContainsKey(_newState.StateType) == false)
         {
-            _newState.Init(owner, this);
-            _stateDic.Add(_newState.stateType, _newState);
+            _newState.Init(mainModule, this);
+            _stateDic.Add(_newState.StateType, _newState);
         }
     }
+    #endregion
+    
+
+    #region 찾기 
+    public void SearchForAttackTarget()
+    {
+        var _target = SearchForTarget(aiDataSO.attackRadius, aiDataSO.attackAngle);
+        if (_target != null)
+        {
+            aiConditions.IsCanAttack = true; 
+        }
+        else
+        {
+            aiConditions.IsCanAttack = false;   
+        }
+    }
+    
+    /// <summary>
+    /// 추적 타겟 찾기 
+    /// </summary>
+    public void SearchForChaseTarget()
+    {
+        var _target = SearchForTarget(aiDataSO.chaseViewRadius, aiDataSO.chaseViewAngle);
+        if (_target != null)
+        {
+            aiConditions.IsCanChase = true; 
+        }
+        else
+        {
+            aiConditions.IsCanChase = false; 
+        }
+        aiConditions.Target = _target; 
+    }
+
+    /// <summary>
+    /// 목표 찾기 
+    /// </summary>
+    /// <param name="_findRadius">찾을 범위</param>
+    /// <param name="_findAngle">찾을 시야각</param>
+    public Transform SearchForTarget(float _findRadius, float _findAngle)
+    {
+        Collider[] targets = Physics.OverlapSphere(mainModule.transform.position, _findRadius, aiDataSO.layerMask);
+
+        List<Transform> nearbyEnemies = new List<Transform>(); 
+        if (targets.Length > 0)
+        {
+            foreach (var col in targets)
+            {
+                // 플레이어와 적의 거리를 계산합니다.
+                //float distanceToPlayer = Vector3.Distance(col.transform.position, owner.transform.position);
+
+                // 시야각 내에 플레이어가 있고 감지 범위 내에 있다면 적을 목록에 추가합니다.
+                // + 공격 가능한 적이라면 
+                if (/*distanceToPlayer <= _findRadius &&*/ IsFieldOfView(col.transform, _findAngle) && IsCanTargeting(col.transform) && CheckNotDied(col.transform))
+                {
+                    nearbyEnemies.Add(col.transform);
+                }
+            }
+
+            Transform selectedTarget = SelectTarget(nearbyEnemies.ToArray());
+            return selectedTarget; 
+        }
+
+        return null; 
+    }
+
+    private bool CheckNotDied(Transform _enemy)
+    {
+        return ! _enemy.GetComponent<IDamagable>().IsDied; 
+    }
+    /// <summary>
+    /// 지상 타입인지 공중 타입인지 파악해서 확인 
+    /// </summary>
+    /// <returns></returns>
+    private bool IsCanTargeting(Transform _enemy)
+    {
+        IDamagable _damagable = _enemy.GetComponent<IDamagable>();
+        if (_damagable != null)
+        {
+            if ((mainModule.UnitDataSO.groundAttack > 0 && _damagable.MoveType == MoveType.ground)
+                || (mainModule.UnitDataSO.airAttack > 0 && _damagable.MoveType == MoveType.air))
+            {
+                return true; 
+            }
+        }
+        Debug.Log("공격할 수 없는 대상 : " + _enemy.name);
+        return false; 
+    }
+    /// <summary>
+    /// 유닛의 시야 안에 있는가 
+    /// </summary>
+    /// <param name="enemy"></param>
+    /// <returns></returns>
+    private bool IsFieldOfView(Transform enemy, float _viewAngle)
+    {
+        Vector3 directionToPlayer = enemy.position - mainModule.transform.position;
+        float angleToPlayer = Vector3.Angle(mainModule.transform.forward, directionToPlayer);
+
+        // 시야각 내에 플레이어가 있는지 확인합니다.
+        if (angleToPlayer < _viewAngle * 0.5f)
+        {
+            // 시야각 내에 플레이어가 있으면 true 반환
+            return true;
+        }
+
+        // 시야각 내에 플레이어가 없으면 false 반환
+        return false;
+    }
+    
+    /// <summary>
+    /// 우선 순위 타겟 선택 
+    /// </summary>
+    /// <param name="targets"></param>
+    /// <returns></returns>
+    private Transform SelectTarget(Transform[] targets)
+    {
+        Transform bestTarget = null;
+        float highestPriority = float.MinValue;
+
+        foreach (Transform target in targets)
+        {
+            float priority = CalculatePriority(target.gameObject);
+            if (priority > highestPriority)
+            {
+                highestPriority = priority;
+                bestTarget = target.transform;
+            }
+        }
+
+        return bestTarget;
+    }
+
+    /// <summary>
+    /// 우선 순위 계산 
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    private float CalculatePriority(GameObject target)
+    {
+        float priority = 0; 
+        foreach (var _layerMask in aiDataSO.layerMaskPriority.Dictionary)
+        {
+            if (target.layer == _layerMask.Value)
+            {
+                priority = _layerMask.Key; 
+            }
+        }
+        return priority;
+    }
+    #endregion
+
 }

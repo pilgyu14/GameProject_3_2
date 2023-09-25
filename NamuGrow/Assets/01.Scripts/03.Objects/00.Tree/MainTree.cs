@@ -19,6 +19,9 @@ public class WallComp : AbTreeSystemComp,IDamagable, IUpdateObj
     {
     }
 
+    [field:SerializeField] public bool IsDied { get; set; } = false; 
+
+    [field: SerializeField] public MoveType MoveType => MoveType.ground; 
     [field: SerializeField] public float MaxHealth { get; set; } = 100f; 
     
     //public float MaxHealth { get=>maxHp; set=>maxHp = value; }

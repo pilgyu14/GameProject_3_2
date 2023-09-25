@@ -4,15 +4,20 @@ using UnityEngine;
 
 public abstract class AbBaseModule : MonoBehaviour
 {
-    private AbMainModule mainModule;
-
-    protected virtual void Start(AbMainModule _mainModule)
-    {
-        this.mainModule = _mainModule; 
-    }
+    protected AbMainModule mainModule;
 
     protected virtual void Awake()
     {
         
     }
+    protected virtual void Start()
+    {
+        
+    }
+    public virtual void InitMainModule(AbMainModule _mainModule)
+    {
+        this.mainModule = _mainModule; 
+    }
+
+
 }

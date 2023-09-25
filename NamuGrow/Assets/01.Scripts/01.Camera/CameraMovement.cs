@@ -12,8 +12,8 @@ namespace _01.Scripts
         private Vector2 p1;
         private Vector2 p2;
         
-        private float maxHeight = 17f;
-        private float minHeight = 3f;
+        private float maxHeight = 60;
+        private float minHeight = 10f;
 
         private float hsp;
         private float vsp;

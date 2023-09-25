@@ -87,7 +87,7 @@ public abstract class AbTreeBase : MonoBehaviour, ITree, ITreeElement, IUpdateOb
 
     public virtual void OnUpdate()
     {
-
+        
     }
 
     public virtual void OnLateUpdate()
