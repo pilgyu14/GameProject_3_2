@@ -5,7 +5,7 @@ using LSystem;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
+public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable,ITeam
 {
     [SerializeField] private AIDataSO aiDataSO;
     [SerializeField]
@@ -20,6 +20,11 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
     private UnitAniamtion unitAnimation;
 
     private SkillModule skillModule; 
+    
+    // 같은 팀으로 영입 
+    //  -> 영입 매니저 하나 만들어서 보유 유닛 관리하는거 
+    // -> 현재 클릭한 오브젝트 관리 할 수 있어야 함 
+    
     // 플레이어 타입이면 
     // 명령을 받는다 
     // 
@@ -36,7 +41,10 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
     // 프로퍼티 
     public AIBrain AIBrain => aiBrain;
 
-    
+    public TeamType TeamType { get=>teamType;
+        set => teamType = value;
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -92,7 +100,10 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
         // 죽음 설정 
     }
 
-    [field:SerializeField]public bool IsClickUnit { get; set; }
+    [field:SerializeField]public bool IsClickUnit {
+        get => teamType == TeamType.Player;
+        set { }
+    }
     public void ClickUnit()
     {
         selectMark.SetActive(true);
@@ -179,4 +190,5 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable
     }
 
     #endregion
+
 }

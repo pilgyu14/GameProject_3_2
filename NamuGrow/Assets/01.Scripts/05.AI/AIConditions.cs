@@ -16,7 +16,10 @@ public class AIConditions : AbBaseModule
     [SerializeField]
     private bool isControl;
     [SerializeField] 
-    private bool isBasicAttackCool; 
+    private bool isBasicAttackCool;
+
+    [SerializeField] private bool isCanSkill; 
+    [SerializeField] private bool isSkillCoolTime; 
     public Transform Target
     {
         get => target;
@@ -63,5 +66,16 @@ public class AIConditions : AbBaseModule
     {
         get => isBasicAttackCool;
         set => isBasicAttackCool = value; 
+    }
+
+    public bool IsCanSkill
+    {
+        get => isCanSkill;
+        set => isCanSkill = value;
+    }
+    public bool IsSkillCoolTime
+    {
+        get => isSkillCoolTime;
+        set => isSkillCoolTime = value;
     }
 }

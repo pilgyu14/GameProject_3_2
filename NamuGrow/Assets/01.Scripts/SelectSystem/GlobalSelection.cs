@@ -108,17 +108,21 @@ public class GlobalSelection : MonoBehaviour
                         // UI 데이터 설정 
                         // 함수 주고                          
                     }
-                    
-                    // 이미 선택중인 것에 추가 
-                    if (Input.GetKey(KeyCode.LeftShift)) //inclusive select
+
+                    IClickUnit _clickUnit = hit.transform.GetComponent<IClickUnit>();
+                    if (_clickUnit != null && _clickUnit.IsClickUnit == true)
                     {
-                        selected_table.AddSelected(hit.transform.gameObject);
-                    }
-                    // 기존 선택 배제하고 새로 선택 
-                    else //exclusive selected
-                    {
-                        selected_table.DeselectAll();
-                        selected_table.AddSelected(hit.transform.gameObject);
+                        // 이미 선택중인 것에 추가 
+                        if (Input.GetKey(KeyCode.LeftShift)) //inclusive select
+                        {
+                            selected_table.AddSelected(hit.transform.gameObject);
+                        }
+                        // 기존 선택 배제하고 새로 선택 
+                        else //exclusive selected
+                        {
+                            selected_table.DeselectAll();
+                            selected_table.AddSelected(hit.transform.gameObject);
+                        }
                     }
                 }
                 // 아무것도 없었다면 

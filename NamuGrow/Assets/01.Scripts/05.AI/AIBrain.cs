@@ -23,7 +23,8 @@ public class AIBrain : AbBaseModule
     private AttackState attackState;
     private CommandState commandState;
 
-    protected AIConditions aiConditions; 
+    protected AIConditions aiConditions;
+    protected SkillModule skillModule; 
     public AIDataSO AiDataSo => aiDataSO; 
     
     #endregion
@@ -37,6 +38,7 @@ public class AIBrain : AbBaseModule
     {
         base.InitMainModule(_mainModule);
         aiConditions = _mainModule.GetModule<AIConditions>(ModuleType.AICondition);
+        skillModule = _mainModule.GetModule<SkillModule>(ModuleType.Skill);
     }
 
     protected override void Start()
@@ -125,7 +127,24 @@ public class AIBrain : AbBaseModule
     #endregion
     
 
-    #region 찾기 
+    #region 찾기
+
+    public void SearchForSkillTarget()
+    {
+        List<Collider> colList = new List<Collider>(); 
+        var _cols = skillModule.MyCollisions();
+        bool _isCan = false; 
+        foreach (var _col in _cols)
+        {
+            if (IsCanTargeting(_col.transform) == true)
+            {
+                _isCan = true; 
+            }
+        }
+
+        aiConditions.IsCanSkill = _isCan; 
+        //=  skillModule.MyCollisions();
+    }
     public void SearchForAttackTarget()
     {
         var _target = SearchForTarget(aiDataSO.attackRadius, aiDataSO.attackAngle);
