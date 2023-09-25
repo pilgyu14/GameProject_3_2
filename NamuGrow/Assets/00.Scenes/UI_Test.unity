@@ -1824,6 +1824,9 @@ MonoBehaviour:
   EventPrefab:
   - {fileID: 3184817309517083291, guid: 75647fc07f0cca4409a708e4139abc59, type: 3}
   - {fileID: 6795921429081996354, guid: 38c1d79a5441aa04baea3c4708cceab8, type: 3}
+  - {fileID: 6795921429081996354, guid: a72a5d5fdc152e24788580a59ab9075b, type: 3}
+  - {fileID: 6795921429081996354, guid: 163df3d3fd6a3374b85aa3af48040a91, type: 3}
+  - {fileID: 6795921429081996354, guid: 2f07958c0c364524fa3c7c6985dd2523, type: 3}
   nowEventObject: {fileID: 0}
 --- !u!114 &745881426
 MonoBehaviour:
