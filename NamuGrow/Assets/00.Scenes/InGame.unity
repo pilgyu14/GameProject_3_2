@@ -950,7 +950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.8125
+      value: -15.4375
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalPosition.y
@@ -958,7 +958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.125
+      value: -21.875
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalRotation.w
@@ -991,6 +991,10 @@ PrefabInstance:
     - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_Name
       value: GreenSpider (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5694803549035778645, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1512,6 +1516,10 @@ PrefabInstance:
       propertyPath: aiDataSO
       value: 
       objectReference: {fileID: 11400000, guid: 12319a22cc57c6343bbd8550d528aa5a, type: 2}
+    - target: {fileID: 8885515009025909625, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
+      propertyPath: teamType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -2542,7 +2550,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &808258859
 GameObject:
@@ -2630,7 +2638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.625
+      value: -55.75
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2638,7 +2646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.5625
+      value: 16.4375
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2671,6 +2679,10 @@ PrefabInstance:
     - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_Name
       value: GreenSpider (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5694803549035778645, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3188,6 +3200,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -51.529114
       objectReference: {fileID: 0}
+    - target: {fileID: 8885515009025909625, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
+      propertyPath: teamType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3464,7 +3480,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1080360700 stripped
 GameObject:
@@ -3805,6 +3821,10 @@ PrefabInstance:
     - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_Name
       value: GreenSpider (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5694803549035778645, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4326,6 +4346,10 @@ PrefabInstance:
       propertyPath: aiDataSO
       value: 
       objectReference: {fileID: 11400000, guid: 12319a22cc57c6343bbd8550d528aa5a, type: 2}
+    - target: {fileID: 8885515009025909625, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
+      propertyPath: teamType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -4965,11 +4989,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -41.125
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4977,7 +5001,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 21.625
       objectReference: {fileID: 0}
     - target: {fileID: 2469123704918754004, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5010,6 +5034,10 @@ PrefabInstance:
     - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_Name
       value: GreenSpider
+      objectReference: {fileID: 0}
+    - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5694803549035778645, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5526,6 +5554,10 @@ PrefabInstance:
     - target: {fileID: 5699255119107301387, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -51.529114
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885515009025909625, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
+      propertyPath: teamType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
