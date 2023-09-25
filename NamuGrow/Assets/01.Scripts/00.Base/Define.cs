@@ -105,6 +105,7 @@ public enum TeamType
 public interface ITeam
 {
     public TeamType TeamType { get; set; }
+    public void ScoutUnit(TeamType _temType); 
 }
 public enum AnimationTriggerType
 {

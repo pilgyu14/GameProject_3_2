@@ -16,7 +16,7 @@ public class SkillModule : AbBaseModule
     {
         base.Start();
         unitAnimation ??= mainModule.GetModule<UnitAniamtion>(ModuleType.Animation);
-        hitCollider.Init(skillSO);
+        hitCollider.Init(skillSO,mainModule.GetComponent<ITeam>());
         particleSystems = skillSO.effectParent.GetComponentsInChildren<ParticleSystem>(); 
     }
 

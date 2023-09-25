@@ -45,6 +45,11 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable,ITeam
         set => teamType = value;
     }
 
+    public void ScoutUnit(TeamType _temType)
+    {
+        TeamType = _temType; 
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -124,12 +129,14 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable,ITeam
     }
     public void Damaged(float _damageAmount)
     {
+        if (IsDied == true) return; 
         Debug.Log("피격 : " + _damageAmount);
         float _curHp = CurHealth;
         _curHp -= _damageAmount;
         CurHealth = Mathf.Clamp(_curHp, 0, MaxHealth);
         if (CurHealth <= 0)
         {
+            IsDied = true; 
             Die();
         }
     }
@@ -149,7 +156,8 @@ public class TestEnemy : AbMainModule, IClickUnit, IDamagable,IPoolable,ITeam
     public void Reset()
     {
         InitHp();
-        SetDissolve(0f); 
+        SetDissolve(0f);
+        IsDied = false; 
     }
 
     #region 디버그

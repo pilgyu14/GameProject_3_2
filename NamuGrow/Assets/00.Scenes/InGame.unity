@@ -829,11 +829,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4264a84b0b3ba6945af6a01d0433e914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  haveEnergyData:
-    sap: 0
-    sweetSap: 0
-    acorn: 0
-    kiwi: 0
+  sap: 0
+  sweetSap: 0
+  acorn: 0
+  kiwi: 0
 --- !u!4 &446175459
 Transform:
   m_ObjectHideFlags: 0
@@ -990,7 +989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_Name
-      value: GreenSpider (3)
+      value: GreenSpider
       objectReference: {fileID: 0}
     - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_Layer
@@ -2678,7 +2677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_Name
-      value: GreenSpider (1)
+      value: GreenSpider
       objectReference: {fileID: 0}
     - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_Layer
@@ -3820,7 +3819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_Name
-      value: GreenSpider (2)
+      value: GreenSpider
       objectReference: {fileID: 0}
     - target: {fileID: 3797623870567112783, guid: f3b26a5de37dc97408b48bdec569b748, type: 3}
       propertyPath: m_Layer

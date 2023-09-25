@@ -10,6 +10,7 @@ public class SkillCollider : MonoBehaviour
     private BoxCollider collider;
     private SkillSO skillSO;
 
+    public ITeam currentTeam; 
     public BoxCollider Collider => collider; 
     private void Awake()
     {
@@ -21,9 +22,10 @@ public class SkillCollider : MonoBehaviour
         ActiveCollider(false); 
     }
 
-    public void Init(SkillSO _skillSO)
+    public void Init(SkillSO _skillSO, ITeam _curTeam)
     {
-        this.skillSO = _skillSO; 
+        this.skillSO = _skillSO;
+        this.currentTeam = _curTeam; 
     }
     public void ActiveCollider(bool _isActive)
     {
