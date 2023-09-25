@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetSettingManager : MonoBehaviour
+public class TargetSettingManager : MonoSingleton<TargetSettingManager>
 {
     public List<LayerMask> targetLayerMask = new List<LayerMask>();
 

@@ -206,8 +206,14 @@ namespace RTS_Cam
         /// </summary>
         private void Move()
         {
+            float _plusSpeed = 1f;
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            {
+                _plusSpeed = 2.5f; 
+            }
             if (useKeyboardInput)
             {
+     
                 Vector3 desiredMove = new Vector3(KeyboardInput.x, 0, KeyboardInput.y);
 
                 desiredMove *= keyboardMovementSpeed;
@@ -215,7 +221,7 @@ namespace RTS_Cam
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
                 desiredMove = m_Transform.InverseTransformDirection(desiredMove);
 
-                m_Transform.Translate(desiredMove, Space.Self);
+                m_Transform.Translate(desiredMove * _plusSpeed, Space.Self);
             }
 
             if (useScreenEdgeInput)
@@ -235,7 +241,7 @@ namespace RTS_Cam
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
                 desiredMove = m_Transform.InverseTransformDirection(desiredMove);
 
-                m_Transform.Translate(desiredMove, Space.Self);
+                m_Transform.Translate(desiredMove * _plusSpeed, Space.Self);
             }       
         
             if(usePanning && Input.GetKey(panningKey) && MouseAxis != Vector2.zero)
@@ -247,7 +253,7 @@ namespace RTS_Cam
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
                 desiredMove = m_Transform.InverseTransformDirection(desiredMove);
 
-                m_Transform.Translate(desiredMove, Space.Self);
+                m_Transform.Translate(desiredMove * _plusSpeed, Space.Self);
             }
         }
 
