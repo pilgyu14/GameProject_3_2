@@ -76,12 +76,12 @@ namespace _01.Scripts
 
         private void getCameraRotation()
         {
-            if (Input.GetMouseButtonDown(2))
+            if (Input.GetMouseButtonDown(1))
             {
                 p1 = Input.mousePosition;
             }
 
-            if (Input.GetMouseButton(2))
+            if (Input.GetMouseButton(1))
             {
                 p2 = Input.mousePosition;
 

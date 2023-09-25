@@ -113,7 +113,6 @@ public class ProductionDataSO : ScriptableObject
 {
     public EnergyType produceType; // 생산 아이템 타입 
     public int amount; 
-
 }
 
 
