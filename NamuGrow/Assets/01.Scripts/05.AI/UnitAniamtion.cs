@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class UnitAniamtion : AbBaseModule
 {
-    
+    [SerializeField]
     protected Animator animator;
 
     protected readonly int moveStr = Animator.StringToHash("IdleAndRun") ;

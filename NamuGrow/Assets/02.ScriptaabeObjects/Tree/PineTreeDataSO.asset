@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d44529c50424c714b871ebe335f5995b, type: 3}
-  m_Name: New Tree Data SO 1
-  m_EditorClassIdentifier: 
+  m_Name: PineTreeDataSO
+  m_EditorClassIdentifier: Assembly-CSharp::TreeData2SO
   treeType: 2
   spriteAddress: 
-  treePrefab: {fileID: 4387224794191711088, guid: 77e5aaa054833ed49999fc9f76adb078, type: 3}
+  treePrefab: {fileID: 4215718072934914629, guid: 7e1a43ff15b1684419feca5a136aafcb, type: 3}
   treeAbilityType: 0
   productEnergyType: 0
-  maxLevel: 0
+  maxLevel: 4
   curLevel: 0
   treeByLevelList:
   - {fileID: 11400000, guid: e6af0845690ae0f47b905b5f13fc4add, type: 2}
+  - {fileID: 11400000, guid: 3132bfa0ab04b7f43bb860499790a8ea, type: 2}
+  - {fileID: 11400000, guid: bc74dc84e3f8a4f4087e61e17e197118, type: 2}

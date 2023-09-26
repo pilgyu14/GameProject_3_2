@@ -53,7 +53,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.71
   m_Speed: 1
-  m_Acceleration: 8
+  m_Acceleration: 35.64
   avoidancePriority: 50
   m_AngularSpeed: 1000
   m_StoppingDistance: 0
@@ -81,7 +81,6 @@ MonoBehaviour:
   aiDataSO: {fileID: 11400000, guid: b9fa72bf0ba9e1e4c9568472fa9292d5, type: 2}
   aiBrain: {fileID: 0}
   teamType: 0
-  <IsClickUnit>k__BackingField: 0
   <IsDied>k__BackingField: 0
   <MaxHealth>k__BackingField: 0
   <CurHealth>k__BackingField: 0
@@ -115,6 +114,8 @@ MonoBehaviour:
   isCanAttack: 0
   isControl: 0
   isBasicAttackCool: 0
+  isCanSkill: 0
+  isSkillCoolTime: 0
 --- !u!114 &8086254268108789018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab665846d8b314f45ae1d049f1306172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1001 &4560263780492442641
 PrefabInstance:
   m_ObjectHideFlags: 0

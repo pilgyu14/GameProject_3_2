@@ -31,19 +31,21 @@ public class AttackState : State
         // 스킬 사용중에는 막아야해 
         // 
         Debug.Log("AttackState..");
+        bool _isCanAttack = aiCondition.IsCanAttack;
+    
+        if (_isCanAttack== false)
+        {
+            aiBrain.ChangeState(NagativeType);
+        }
+        
         aiBrain.SearchForSkillTarget();
         if (CheckCanSkill() == true)
         {         
             return; 
         }
 
-        bool _isCanAttack = aiCondition.IsCanAttack;
         aiBrain.SearchForAttackTarget();
         attackModule.MeleeAttack(_isCanAttack, owner.UnitDataSO.attackSpeed);
-        if (_isCanAttack== false)
-        {
-            aiBrain.ChangeState(NagativeType);
-        }
         // 타겟 지정하고 
         // 지상인지 공중인지 체크 
         // 모션 나오고 
@@ -64,7 +66,7 @@ public class AttackState : State
         bool _isCanSkill = aiCondition.IsCanSkill;
         if (_isCanSkill == true)
         {
-            skillModule.PlayEffect(); 
+            return skillModule.PlayEffect(); 
             //aiBrain.ChangeState(StateType.Skill);
             return true;
         }

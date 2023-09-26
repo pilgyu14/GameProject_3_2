@@ -19,8 +19,8 @@ MonoBehaviour:
   addTroops: 0
   productAmount: 0
   produceAmountDic:
-    keyList: 
-    valueList: 
+    keyList: 01000000
+    valueList: 0a000000
     serialized: 1
   attackPower: 0
   hp: 0

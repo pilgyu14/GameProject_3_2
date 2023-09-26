@@ -16,9 +16,10 @@ public class GlobalSelection : MonoBehaviour
     //Collider variables
     //=======================================================//
 
+    [SerializeField]
     MeshCollider selectionBox;
     Mesh selectionMesh;
-    
+        
     Vector3 p1; // 첫 클릭 지점
     Vector3 p2; // 마우스 up 했을때 지점 
 
@@ -110,7 +111,8 @@ public class GlobalSelection : MonoBehaviour
                     }
 
                     IClickUnit _clickUnit = hit.transform.GetComponent<IClickUnit>();
-                    if (_clickUnit != null && _clickUnit.IsClickUnit == true)
+                    ITeam _team = hit.transform.GetComponent<ITeam>();
+                    if (_clickUnit != null && _clickUnit.IsClickUnit == true && _team.TeamType == TeamType.Player)
                     {
                         // 이미 선택중인 것에 추가 
                         if (Input.GetKey(KeyCode.LeftShift)) //inclusive select
@@ -164,32 +166,43 @@ public class GlobalSelection : MonoBehaviour
                         Debug.DrawLine(Util.MainCam.ScreenToWorldPoint(corner), hit.point, Color.red, 1.0f);
                     }
                     i++;
-                }
+                }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 
                 //generate the mesh
                 selectionMesh = GenerateSelectionMesh(verts,vecs);
 
-                selectionBox = gameObject.AddComponent<MeshCollider>();
-                selectionBox.sharedMesh = selectionMesh;
-                selectionBox.convex = true;
-                selectionBox.isTrigger = true;
+                //selectionBox = gameObject.AddComponent<MeshCollider>();
+                StartCoroutine(CheckCollider());
 
                 if (!Input.GetKey(KeyCode.LeftShift))
                 {
                     selected_table.DeselectAll();
                 }
 
-               Destroy(selectionBox, 1f);
 
             }//end marquee select
 
             dragSelect = false;
 
-        }
+        }                                                                                                                                                                           
        
     }
 
-    public Material mat; 
+    public MeshFilter meshFilter; 
+    private IEnumerator CheckCollider()
+    {
+        selectionBox.enabled = true;
+        meshFilter.mesh = selectionMesh; 
+        selectionBox.sharedMesh = selectionMesh;
+        selectionBox.convex = true;
+        selectionBox.isTrigger = true;
+
+        yield return new WaitForSeconds(1f);
+        selectionBox.enabled = false;
+        meshFilter.mesh = null;
+
+    }
+
     private void OnGUI()
     {
         // 드래그 선택이라면
@@ -257,8 +270,14 @@ public class GlobalSelection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("@@@충돌 : " + other.name );
-        selected_table.AddSelected(other.gameObject);
+        IClickUnit _clickUnit = hit.transform.GetComponent<IClickUnit>();
+        ITeam _team = hit.transform.GetComponent<ITeam>();
+        if (_clickUnit != null && _clickUnit.IsClickUnit == true && _team.TeamType == TeamType.Player)
+        {
+            Debug.Log("@@@충돌 : " + other.name );
+            selected_table.AddSelected(other.gameObject);    
+        }
+        
     }
 
 }

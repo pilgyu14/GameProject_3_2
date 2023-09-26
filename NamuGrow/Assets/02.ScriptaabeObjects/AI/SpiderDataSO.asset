@@ -25,7 +25,7 @@ MonoBehaviour:
       m_Bits: 512
     serialized: 1
   idleSpeed: 20
-  chaseSpeed: 40
+  chaseSpeed: 20
   chaseViewAngle: 360
   chaseViewRadius: 77.9
   patrolRadius: 182.6

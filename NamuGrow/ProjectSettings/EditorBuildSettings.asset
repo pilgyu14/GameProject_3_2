@@ -12,7 +12,10 @@ EditorBuildSettings:
     path: Assets/00.Scenes/UI_Test.unity
     guid: f2c09e42317da9244a09541017ef71dd
   - enabled: 1
-    path: Assets/00.Scenes/InGame.unity
+    path: Assets/01.Scripts/000.Test/InGame.unity
+    guid: 50917d38654e67a488b58983eacd92f9
+  - enabled: 0
+    path: Assets/00.Scenes/InGame2.unity
     guid: 9e084a9cb478c9649ba996a7e70f8215
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 0d05f473535429941af307eb591b6dde, type: 2}

@@ -11,6 +11,7 @@ public class SkillModule : AbBaseModule
     private UnitAniamtion unitAnimation; 
     // 범위 -> 히트박스로 
     public SkillCollider hitCollider;
+    public GameObject skillEffect; 
     public ParticleSystem[] particleSystems;
     protected override void Start()
     {
@@ -18,7 +19,7 @@ public class SkillModule : AbBaseModule
         unitAnimation ??= mainModule.GetModule<UnitAniamtion>(ModuleType.Animation);
         aiConditions ??= mainModule.GetModule<AIConditions>(ModuleType.AICondition);
         hitCollider.Init(skillSO,mainModule.GetComponent<ITeam>());
-        particleSystems = skillSO.effectParent.GetComponentsInChildren<ParticleSystem>(); 
+        particleSystems =skillEffect.GetComponentsInChildren<ParticleSystem>(); 
     }
 
     public bool CanUseSkill()
@@ -61,7 +62,7 @@ public class SkillModule : AbBaseModule
     /// <summary>
     /// 이펙토
     /// </summary>
-    public void PlayEffect()
+    public bool PlayEffect()
     {
         bool _isCanPerformSkill = false;
         if (aiConditions.IsCanSkill == true && aiConditions.IsSkillCoolTime == false)
@@ -85,10 +86,12 @@ public class SkillModule : AbBaseModule
             // 애니메이션 실행 
             // 콜라이더 활성화 
             // 레이어로 걸러졌는데 히트된 적들 데미지 입히기 
+            return true; 
         }
         else
         {
             unitAnimation.PlaySkillAnim(false);
+            return false;
         }
     }
 
@@ -121,6 +124,8 @@ public class SkillModule : AbBaseModule
                 }
                 yield break;
             }
+
+            yield return null; 
         }
     }
 }

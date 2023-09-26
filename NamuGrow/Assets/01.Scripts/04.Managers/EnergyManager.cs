@@ -76,8 +76,8 @@ public class EnergyManager : MonoSingleton<EnergyManager>
     public bool AddEnergy(EnergyType _energyType, int _amount)
     {
         // 강화 가능한만큼 자원이 있는지 체크 
-        bool _isAble = IsEnough(_energyType, _amount);
-        if (_isAble == false) return false;
+        //bool _isAble = IsEnough(_energyType, _amount);
+        //if (_isAble == false) return false;
 
         switch (_energyType)
         {

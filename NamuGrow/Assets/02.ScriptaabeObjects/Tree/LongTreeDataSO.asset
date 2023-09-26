@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d44529c50424c714b871ebe335f5995b, type: 3}
-  m_Name: MainTreeDataSO
+  m_Name: LongTreeDataSO
   m_EditorClassIdentifier: Assembly-CSharp::TreeData2SO
-  treeType: 0
+  treeType: 1
   spriteAddress: 
-  treePrefab: {fileID: 7091531549748247091, guid: 0f435143d2c9e054b94563b09701647a, type: 3}
+  treePrefab: {fileID: 3617291151123154102, guid: aa9de9a2cce2232499d33e70683854c4, type: 3}
   treeAbilityType: 0
   productEnergyType: 0
   maxLevel: 4

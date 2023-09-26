@@ -82,12 +82,6 @@ public class A
 
 public class InputManager : MonoSingleton<InputManager>
 {
-    public void Awake()
-    {
-        A a = new A();
-        A b = new A();
-        a.Equals(b);
-    }
 
     private bool isCanInput = true;
 

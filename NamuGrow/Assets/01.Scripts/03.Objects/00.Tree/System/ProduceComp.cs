@@ -83,7 +83,7 @@ public class ProduceComp : AbTreeSystemComp
     /// </summary>
     protected virtual void ProduceEnergy()
     {
-        foreach (var treeElement in produceEnergyElementList)
+        foreach (var treeElement in productionEnergyList)
         {
             float outputEnergy = treeElement.ProduceEnergy(); //  생산된 에너지 
 
